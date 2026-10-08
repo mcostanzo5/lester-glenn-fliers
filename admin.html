@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Store settings (admin)</title>
+<style>
+@font-face{font-family:Rubik;font-weight:400;src:url(vendor/rubik/rubik-400-normal.woff2) format('woff2')}
+@font-face{font-family:Rubik;font-weight:500;src:url(vendor/rubik/rubik-500-normal.woff2) format('woff2')}
+@font-face{font-family:Rubik;font-weight:700;src:url(vendor/rubik/rubik-700-normal.woff2) format('woff2')}
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  --brand:#0772bc; --brand-ink:#fff; --brand-soft:#e3eff8;
+  --bg:#eef1f4; --panel:#fff; --ink:#1c2630; --muted:#5b6672; --line:#d5dbe1; --field:#f7f9fb; --danger:#b3261e; --ok:#1f7a3d;
+  font-family:Rubik,"Segoe UI",system-ui,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --brand:#4aa3e0; --brand-ink:#06131d; --brand-soft:#16293a; --bg:#11171d; --panel:#1a222a; --ink:#e6ebf0; --muted:#9aa7b3; --line:#2c3843; --field:#141b21; --danger:#f2847c; --ok:#6fcf8e; }
+}
+*,*::before,*::after{box-sizing:inherit}
+[hidden]{display:none !important}
+html{height:100%}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.45}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.topbar{background:#0772bc;color:#fff;display:flex;align-items:center;gap:16px;padding:14px 24px;flex-wrap:wrap}
+.topbar h1{margin:0;font-size:20px;font-weight:700}
+.topbar a{color:#fff;margin-left:auto;font-weight:500}
+main{max-width:1180px;margin:0 auto;padding:24px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:20px}
+.panel h2{margin:0 0 6px;font-size:17px}
+.hint{color:var(--muted);font-size:13.5px;margin:0 0 14px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label,.lbl{font-weight:500;font-size:14px}
+.field small{color:var(--muted);font-size:12.5px}
+input[type=text],input[type=url],input[type=password],select{background:var(--field);border:1px solid var(--line);border-radius:9px;padding:9px 11px;width:100%}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:0 16px}
+@media (max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
+.btn{border:1px solid var(--brand);background:var(--brand);color:var(--brand-ink);padding:10px 16px;border-radius:9px;font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--brand)}
+.btn.danger{background:transparent;color:var(--danger);border-color:var(--danger)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.status{font-size:14px;min-height:20px;margin-top:10px;color:var(--muted)}
+.status.err{color:var(--danger)} .status.ok{color:var(--ok)}
+.layout{display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:start}
+@media (max-width:860px){.layout{grid-template-columns:1fr}}
+.list{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:6px}
+.list button{width:100%;text-align:left;border:1px solid var(--line);background:var(--field);border-radius:9px;padding:10px 12px;cursor:pointer}
+.list button[aria-current="true"]{border-color:var(--brand);background:var(--brand-soft)}
+.colors{display:flex;flex-wrap:wrap;gap:14px}
+.colors label{display:flex;align-items:center;gap:8px;font-size:13.5px}
+input[type=color]{width:42px;height:32px;border:1px solid var(--line);border-radius:6px;padding:2px;background:var(--field)}
+.thumb{width:150px;height:70px;border:1px dashed var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden}
+.thumb img{max-width:100%;max-height:100%}
+.checks label{display:flex;align-items:center;gap:8px;font-size:14px;margin-bottom:8px}
+h3{font-size:14px;margin:18px 0 10px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <h1>Store settings</h1>
+  <a href="./" target="_blank" rel="noopener">Open the public tool</a>
+</header>
+<main>
+  <section class="panel" id="connectPanel">
+    <h2>Connect to GitHub</h2>
+    <p class="hint">Only someone with a GitHub key that can write to this site's repository can save changes here. Without it, nothing on this page can be changed.</p>
+    <div class="grid3">
+      <div class="field"><label for="repoIn">Repository</label><input type="text" id="repoIn" placeholder="your-account/lester-glenn-fliers"><small>Owner and name, like it appears on GitHub.</small></div>
+      <div class="field"><label for="branchIn">Branch</label><input type="text" id="branchIn" value="main"></div>
+      <div class="field"><label for="tokenIn">GitHub key (fine-grained token)</label><input type="password" id="tokenIn" autocomplete="off" placeholder="github_pat_..."><small>See README for how to create it.</small></div>
+    </div>
+    <div class="checks"><label><input type="checkbox" id="rememberIn"> Remember on this computer</label></div>
+    <div class="row">
+      <button class="btn" id="connectBtn">Connect</button>
+      <button class="btn ghost" id="forgetBtn">Forget key</button>
+    </div>
+    <div class="status" id="connectStatus"></div>
+  </section>
+
+  <div class="layout" id="editor" hidden>
+    <section class="panel">
+      <h2>Stores</h2>
+      <ul class="list" id="storeList"></ul>
+      <button class="btn ghost" id="newBtn" style="width:100%">Add a store</button>
+    </section>
+
+    <section class="panel" id="form">
+      <h2 id="formTitle">Store</h2>
+      <p class="hint">Save writes this store to GitHub. The public tool shows the change within about a minute.</p>
+
+      <h3>Basics</h3>
+      <div class="grid2">
+        <div class="field"><label for="f_name">Short name (shown in the store menu)</label><input type="text" id="f_name"></div>
+        <div class="field"><label for="f_googleName">Name as it appears on Google</label><input type="text" id="f_googleName"></div>
+        <div class="field"><label for="f_category">Google category line</label><input type="text" id="f_category" placeholder="Chevrolet dealer in Toms River, NJ"></div>
+        <div class="field"><label for="f_address">Street address</label><input type="text" id="f_address" placeholder="398 NJ-37, Toms River, NJ 08753"><small>Street, city, state zip</small></div>
+        <div class="field"><label for="f_reviewUrl">Google review link</label><input type="url" id="f_reviewUrl"></div>
+        <div class="field"><label for="f_website">Website</label><input type="url" id="f_website"></div>
+        <div class="field"><label for="f_orgName">Company name saved to phones</label><input type="text" id="f_orgName"></div>
+        <div class="field"><label for="f_slogan">Sales desk sign footer line</label><input type="text" id="f_slogan"></div>
+      </div>
+
+      <h3>Phone numbers</h3>
+      <div class="grid3">
+        <div class="field"><label for="f_textLine">Service Phone Number For Texting</label><input type="text" id="f_textLine"></div>
+        <div class="field"><label for="f_salesLine">Sales Phone Number To Text Message</label><input type="text" id="f_salesLine"></div>
+        <div class="field"><label for="f_salesDesk">Sales desk phone</label><input type="text" id="f_salesDesk"></div>
+      </div>
+      <div class="checks">
+        <label><input type="checkbox" id="f_serviceOnly"> Service only (no sales department)</label>
+        <label><input type="checkbox" id="f_hideStars"> Leave the star graphics off review fliers</label>
+        <label><input type="checkbox" id="f_hidePencil"> Leave the pencil icon off the Write A Review button</label>
+      </div>
+
+      <h3>Colors</h3>
+      <div class="colors">
+        <label><input type="color" id="f_accent"> Review fliers</label>
+        <label><input type="color" id="f_deskPrimary"> Desk sign main</label>
+        <label><input type="color" id="f_deskSecondary"> Desk sign bubble</label>
+        <label><input type="color" id="f_contactName"> Card name</label>
+        <label><input type="color" id="f_waveA"> Main wave</label>
+        <label><input type="color" id="f_waveB"> Top accent</label>
+        <label><input type="color" id="f_waveC"> Bottom accent</label>
+      </div>
+
+      <h3>Logos</h3>
+      <div class="grid2">
+        <div class="field"><span class="lbl">Store logo</span><div class="row"><div class="thumb" id="t_dealer"></div><input type="file" id="u_dealer" accept="image/png,image/webp,image/jpeg,image/svg+xml"></div></div>
+        <div class="field"><span class="lbl">Brand logo</span><div class="row"><div class="thumb" id="t_brand"></div><input type="file" id="u_brand" accept="image/png,image/webp,image/jpeg,image/svg+xml"></div></div>
+      </div>
+
+      <h3>Brand font</h3>
+      <div class="field">
+        <div class="row"><span id="fontStatus" class="hint" style="margin:0"></span><button type="button" class="btn ghost" id="fontClear" style="padding:5px 12px;font-size:13px">Use standard font</button></div>
+        <input type="file" id="u_font" multiple accept=".otf,.ttf,.woff,.woff2">
+        <small>Upload every weight at once. Weights are read from the file names (Regular, Medium, Bold, Black, Italic...).</small>
+      </div>
+
+      <div class="row" style="margin-top:8px">
+        <button class="btn" id="saveBtn">Save store</button>
+        <button class="btn danger" id="delBtn">Delete store</button>
+      </div>
+      <div class="status" id="saveStatus"></div>
+    </section>
+  </div>
+</main>
+
+<script>
+(function(){
+"use strict";
+const $ = id => document.getElementById(id);
+const KEY = "lg-flier-admin";
+let cfg = { repo:"", branch:"main", token:"" };
+let stores = [], storesSha = null, editing = null, pending = {}; /* pending uploads: path -> {b64} */
+
+function setStatus(el, msg, kind){ el.textContent = msg || ""; el.className = "status" + (kind ? " " + kind : ""); }
+function digits(v){ let d = String(v || "").replace(/\D/g, ""); if(d.length === 11 && d[0] === "1") d = d.slice(1); return d; }
+function fmtPhone(v){ const d = digits(v); return d.length === 10 ? `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}` : String(v || "").trim(); }
+function slugify(v){ return String(v || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "store"; }
+const utf8ToB64 = s => btoa(unescape(encodeURIComponent(s)));
+const b64ToUtf8 = b => decodeURIComponent(escape(atob(b.replace(/\n/g, ""))));
+async function blobToB64(blob){ const buf = new Uint8Array(await blob.arrayBuffer()); let s = ""; for(let i = 0; i < buf.length; i += 0x8000) s += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000)); return btoa(s); }
+
+/* ---------- GitHub ---------- */
+async function gh(path, opts = {}){
+  const r = await fetch(`https://api.github.com/repos/${cfg.repo}${path}`, {
+    ...opts, headers:{ "Accept":"application/vnd.github+json", "Authorization":`Bearer ${cfg.token}`, "X-GitHub-Api-Version":"2022-11-28", ...(opts.headers || {}) }
+  });
+  if(r.status === 404) return { status:404 };
+  const body = await r.json().catch(() => ({}));
+  if(!r.ok){ const e = new Error(body.message || `GitHub error ${r.status}`); e.status = r.status; throw e; }
+  return { status:r.status, body };
+}
+async function getFileSha(path){ const r = await gh(`/contents/${path}?ref=${encodeURIComponent(cfg.branch)}`); return r.status === 404 ? null : r.body.sha; }
+async function putFile(path, b64, message, sha){
+  const body = { message, content:b64, branch:cfg.branch }; if(sha) body.sha = sha;
+  return gh(`/contents/${path}`, { method:"PUT", body:JSON.stringify(body) });
+}
+
+/* ---------- connect ---------- */
+function loadCfg(){ try{ const s = JSON.parse(localStorage.getItem(KEY) || sessionStorage.getItem(KEY) || "null"); if(s) cfg = { ...cfg, ...s }; }catch(e){} }
+function saveCfg(remember){
+  try{ localStorage.removeItem(KEY); sessionStorage.removeItem(KEY); (remember ? localStorage : sessionStorage).setItem(KEY, JSON.stringify(cfg)); }catch(e){}
+}
+loadCfg();
+$("repoIn").value = cfg.repo; $("branchIn").value = cfg.branch || "main"; $("tokenIn").value = cfg.token;
+try{ $("rememberIn").checked = !!localStorage.getItem(KEY); }catch(e){}
+
+$("forgetBtn").addEventListener("click", () => {
+  try{ localStorage.removeItem(KEY); sessionStorage.removeItem(KEY); }catch(e){}
+  cfg.token = ""; $("tokenIn").value = ""; $("editor").hidden = true;
+  setStatus($("connectStatus"), "Key removed from this computer.", "ok");
+});
+$("connectBtn").addEventListener("click", connect);
+async function connect(){
+  const st = $("connectStatus");
+  cfg = { repo:$("repoIn").value.trim().replace(/^https?:\/\/github\.com\//, "").replace(/\.git$/, "").replace(/\/+$/, ""), branch:$("branchIn").value.trim() || "main", token:$("tokenIn").value.trim() };
+  if(!/^[\w.-]+\/[\w.-]+$/.test(cfg.repo)){ setStatus(st, "Enter the repository as owner/name.", "err"); return; }
+  if(!cfg.token){ setStatus(st, "Paste your GitHub key.", "err"); return; }
+  setStatus(st, "Connecting...");
+  try{
+    const r = await gh("");
+    if(r.status === 404){ setStatus(st, "That repository wasn't found, or the key can't see it.", "err"); return; }
+    if(!(r.body.permissions && r.body.permissions.push)){ setStatus(st, "This key can read the repository but can't save to it.", "err"); return; }
+    await loadStores();
+    saveCfg($("rememberIn").checked);
+    $("editor").hidden = false;
+    setStatus(st, `Connected to ${cfg.repo}.`, "ok");
+  } catch(e){
+    setStatus(st, e.status === 401 ? "GitHub didn't accept that key. Check it hasn't expired." : "Couldn't connect: " + e.message, "err");
+  }
+}
+async function loadStores(){
+  const r = await gh(`/contents/stores.json?ref=${encodeURIComponent(cfg.branch)}`);
+  if(r.status === 404){ stores = []; storesSha = null; }
+  else { stores = JSON.parse(b64ToUtf8(r.body.content)); storesSha = r.body.sha; }
+  renderList(); startEdit(stores[0] || null);
+}
+
+/* ---------- list + form ---------- */
+const TEXT = ["name","googleName","category","address","reviewUrl","website","orgName","slogan","textLine","salesLine","salesDesk"];
+const COLORS = { accent:"#0772bc", deskPrimary:"#0772bc", deskSecondary:"#60c1ef", contactName:"#0772bc", waveA:"#0772bc", waveB:"#b9bcc4", waveC:"#0772bc" };
+const CHECKS = ["serviceOnly","hideStars","hidePencil"];
+
+function renderList(){
+  const ul = $("storeList"); ul.innerHTML = "";
+  stores.forEach(s => {
+    const li = document.createElement("li"), b = document.createElement("button");
+    b.type = "button"; b.textContent = s.name || s.id; b.setAttribute("aria-current", String(!!editing && editing.id === s.id));
+    b.addEventListener("click", () => { startEdit(s); renderList(); });
+    li.appendChild(b); ul.appendChild(li);
+  });
+}
+function thumb(id, src){ const t = $(id); t.innerHTML = ""; if(src){ const i = new Image(); i.src = src; i.alt = ""; t.appendChild(i); } }
+function startEdit(s){
+  pending = {};
+  editing = s ? JSON.parse(JSON.stringify(s)) : { id:null, slogan:"EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!", ...COLORS };
+  $("formTitle").textContent = editing.id ? (editing.name || editing.id) : "New store";
+  TEXT.forEach(k => $("f_" + k).value = editing[k] || "");
+  Object.entries(COLORS).forEach(([k, d]) => $("f_" + k).value = editing[k] || d);
+  CHECKS.forEach(k => $("f_" + k).checked = !!editing[k]);
+  thumb("t_dealer", editing.dealerLogo); thumb("t_brand", editing.brandLogo);
+  $("u_dealer").value = ""; $("u_brand").value = ""; $("u_font").value = "";
+  $("delBtn").hidden = !editing.id; showFont(); setStatus($("saveStatus"), "");
+}
+function showFont(){
+  const f = editing.fonts || [];
+  $("fontStatus").textContent = f.length ? `Using ${editing.fontName || "a custom font"} (${f.length} style${f.length === 1 ? "" : "s"}).` : "Using the standard font.";
+  $("fontClear").hidden = !f.length;
+}
+$("newBtn").addEventListener("click", () => { startEdit(null); renderList(); });
+$("fontClear").addEventListener("click", () => { editing.fonts = []; editing.fontName = ""; showFont(); });
+
+/* logos: shrink to 700px and store as webp */
+async function prepLogo(file){
+  const src = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(file); });
+  const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error("That file isn't a readable image.")); i.src = src; });
+  const k = Math.min(1, 700 / Math.max(img.width || 700, img.height || 700));
+  const c = document.createElement("canvas"); c.width = Math.round((img.width || 700) * k); c.height = Math.round((img.height || 700) * k);
+  c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+  const blob = await new Promise(r => c.toBlob(r, "image/webp", 0.9));
+  return { blob, preview:c.toDataURL("image/webp", 0.9) };
+}
+for(const which of ["dealer", "brand"]){
+  $("u_" + which).addEventListener("change", async e => {
+    const f = e.target.files[0]; if(!f) return;
+    try{
+      const { blob, preview } = await prepLogo(f);
+      const id = editing.id || slugify($("f_name").value);
+      const path = `logos/${id}-${which}.webp`;
+      pending[path] = { b64:await blobToB64(blob) };
+      editing[which + "Logo"] = `${path}?v=${Date.now()}`;
+      thumb("t_" + which, preview);
+    } catch(err){ setStatus($("saveStatus"), err.message, "err"); }
+  });
+}
+function fontFromFile(name){
+  const n = name.toLowerCase().replace(/[\s_\-]+/g, "");
+  const style = /italic|oblique/.test(n) ? "italic" : "normal";
+  const table = [["hairline",100],["thin",100],["extralight",200],["ultralight",200],["semilight",300],["light",300],["book",400],["regular",400],["medium",500],["semibold",600],["demibold",600],["extrabold",800],["ultrabold",800],["heavy",900],["black",900],["bold",700]];
+  let weight = 400; for(const [k, w] of table){ if(n.includes(k)){ weight = w; break; } }
+  return { weight, style };
+}
+$("u_font").addEventListener("change", async e => {
+  const files = [...e.target.files]; if(!files.length) return;
+  const list = [];
+  for(const f of files){
+    const safe = f.name.replace(/[^\w.\-]+/g, "_");
+    pending["fonts/" + safe] = { b64:await blobToB64(f) };
+    list.push({ url:"fonts/" + safe, ...fontFromFile(f.name) });
+  }
+  editing.fonts = list;
+  editing.fontName = files[0].name.replace(/\.(otf|ttf|woff2?)$/i, "").replace(/[-_ ]?(regular|bold|medium|italic|light|black|semibold|extrabold|thin|book|heavy|oblique)+$/ig, "").replace(/([a-z])([A-Z])/g, "$1 $2").trim();
+  showFont();
+  setStatus($("saveStatus"), `${files.length} font file${files.length === 1 ? "" : "s"} ready. Save the store to publish them.`, "ok");
+});
+
+/* ---------- save / delete ---------- */
+async function writeStores(message){
+  const content = utf8ToB64(JSON.stringify(stores, null, 1) + "\n");
+  try{
+    const r = await putFile("stores.json", content, message, storesSha);
+    storesSha = r.body.content.sha;
+  } catch(e){
+    if(e.status === 409 || e.status === 422){ throw new Error("The store file changed on GitHub since you connected. Click Connect again to reload, then redo your change."); }
+    throw e;
+  }
+}
+$("saveBtn").addEventListener("click", async () => {
+  const st = $("saveStatus");
+  const body = {};
+  TEXT.forEach(k => body[k] = $("f_" + k).value.trim());
+  ["textLine","salesLine","salesDesk"].forEach(k => { if(body[k]) body[k] = fmtPhone(body[k]); });
+  Object.keys(COLORS).forEach(k => body[k] = $("f_" + k).value);
+  CHECKS.forEach(k => body[k] = $("f_" + k).checked);
+  if(!body.name){ setStatus(st, "Give the store a short name.", "err"); return; }
+  if(!body.googleName){ setStatus(st, "Add the store name exactly as it shows on Google.", "err"); return; }
+  if(body.address && !/^\s*(.+?),\s*(.+?),\s*([A-Za-z]{2})\s+(\d{5})/.test(body.address)){ setStatus(st, "Write the address as street, city, state zip.", "err"); return; }
+  for(const k of ["textLine","salesLine","salesDesk"]) if(body[k] && digits(body[k]).length !== 10){ setStatus(st, "Phone numbers need 10 digits.", "err"); return; }
+  if(body.reviewUrl && !/^https:\/\/\S+$/.test(body.reviewUrl)){ setStatus(st, "The review link should start with https://", "err"); return; }
+  const id = editing.id || (() => { let base = slugify(body.name), n = base, i = 2; while(stores.some(s => s.id === n)) n = `${base}-${i++}`; return n; })();
+  const rec = { id, ...editing, ...body, id };
+  CHECKS.forEach(k => { if(!rec[k]) delete rec[k]; });
+  $("saveBtn").disabled = true;
+  try{
+    for(const [path, f] of Object.entries(pending)){
+      const finalPath = path.replace(/^logos\/store-/, `logos/${id}-`);
+      setStatus(st, `Uploading ${finalPath}...`);
+      await putFile(finalPath, f.b64, `Update ${finalPath}`, await getFileSha(finalPath));
+      ["dealerLogo","brandLogo"].forEach(k => { if(rec[k] && rec[k].startsWith(path)) rec[k] = rec[k].replace(path, finalPath); });
+    }
+    const i = stores.findIndex(s => s.id === id);
+    if(i >= 0) stores[i] = rec; else stores.push(rec);
+    setStatus(st, "Saving store...");
+    await writeStores(`${i >= 0 ? "Update" : "Add"} ${rec.name}`);
+    pending = {}; editing = JSON.parse(JSON.stringify(rec));
+    renderList(); $("delBtn").hidden = false; $("formTitle").textContent = rec.name;
+    setStatus(st, "Saved. The public tool will show it in about a minute.", "ok");
+  } catch(e){
+    setStatus(st, "Not saved: " + e.message, "err");
+  } finally { $("saveBtn").disabled = false; }
+});
+$("delBtn").addEventListener("click", async () => {
+  if(!editing || !editing.id) return;
+  if(!confirm(`Delete ${editing.name}? It disappears from the public tool's store menu.`)) return;
+  const st = $("saveStatus");
+  const keep = stores; stores = stores.filter(s => s.id !== editing.id);
+  try{ await writeStores(`Delete ${editing.name}`); renderList(); startEdit(stores[0] || null); setStatus(st, "Deleted.", "ok"); }
+  catch(e){ stores = keep; setStatus(st, "Not deleted: " + e.message, "err"); }
+});
+
+if(cfg.repo && cfg.token) connect();
+})();
+</script>
+</body>
+</html>

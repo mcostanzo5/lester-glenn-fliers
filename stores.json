@@ -1,0 +1,462 @@
+[
+ {
+  "id": "cdjrf",
+  "accent": "#a4131b",
+  "address": "1199 NJ-37, Toms River, NJ 08755",
+  "brandLogo": "logos/cdjrf-brand.webp",
+  "category": "Jeep dealer in Toms River, NJ",
+  "contactName": "#cc242c",
+  "dealerLogo": "logos/cdjrf-dealer.webp",
+  "deskPrimary": "#a4131b",
+  "deskSecondary": "#e2585e",
+  "googleName": "Lester Glenn Chrysler Dodge Jeep RAM FIAT",
+  "name": "CDJRF (Toms River)",
+  "orgName": "Lester Glenn Chrysler Dodge Jeep RAM FIAT",
+  "reviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x89c19dc23203ae35:0x99e005d988e47bc8!12e1?source=g.page.m.ia._&laa=nmx-review-solicitation-ia2",
+  "salesDesk": "(732) 240-8832",
+  "salesLine": "(732) 338-0770",
+  "slogan": "EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!",
+  "textLine": "(855) 920-4886",
+  "waveA": "#080808",
+  "waveB": "#cc242c",
+  "waveC": "#101011",
+  "website": "https://www.lesterglennchryslerdodgejeep.com"
+ },
+ {
+  "id": "chevy-tr",
+  "accent": "#b07a20",
+  "address": "398 NJ-37, Toms River, NJ 08753",
+  "brandLogo": "logos/chevy-tr-brand.webp",
+  "category": "Chevrolet dealer in Toms River, NJ",
+  "contactName": "#1f6fc1",
+  "dealerLogo": "logos/chevy-tr-dealer.webp",
+  "deskPrimary": "#0072bc",
+  "deskSecondary": "#60c1ef",
+  "fontName": "Chevy Sans",
+  "fonts": [
+   {
+    "url": "fonts/ChevySans-Regular.woff2",
+    "weight": 400,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/ChevySans-Italic.woff2",
+    "weight": 400,
+    "style": "italic"
+   },
+   {
+    "url": "fonts/ChevySans-Medium.woff2",
+    "weight": 500,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/ChevySans-Bold.woff2",
+    "weight": 700,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/ChevySans-BoldItalic.woff2",
+    "weight": 700,
+    "style": "italic"
+   },
+   {
+    "url": "fonts/ChevySans-ExtraBold.woff2",
+    "weight": 800,
+    "style": "normal"
+   }
+  ],
+  "googleName": "Lester Glenn Chevrolet",
+  "name": "Chevrolet (Toms River)",
+  "orgName": "Lester Glenn Chevrolet",
+  "reviewUrl": "https://g.page/r/CSnYEAYaHDHgEAE/review",
+  "salesDesk": "(732) 240-8831",
+  "salesLine": "(732) 338-0793",
+  "slogan": "EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!",
+  "textLine": "(844) 740-0772",
+  "waveA": "#3871c1",
+  "waveB": "#ecc527",
+  "waveC": "#363a38",
+  "website": "https://www.lesterglennchevrolet.com"
+ },
+ {
+  "id": "chevy-fh",
+  "accent": "#b07a20",
+  "address": "3712 US-9, Freehold Township, NJ 07728",
+  "brandLogo": "logos/chevy-fh-brand.webp",
+  "category": "Chevrolet dealer in Freehold, NJ",
+  "contactName": "#1f6fc1",
+  "dealerLogo": "logos/chevy-fh-dealer.webp",
+  "deskPrimary": "#0072bc",
+  "deskSecondary": "#60c1ef",
+  "fontName": "Chevy Sans",
+  "fonts": [
+   {
+    "url": "fonts/ChevySans-Regular.woff2",
+    "weight": 400,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/ChevySans-Italic.woff2",
+    "weight": 400,
+    "style": "italic"
+   },
+   {
+    "url": "fonts/ChevySans-Medium.woff2",
+    "weight": 500,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/ChevySans-Bold.woff2",
+    "weight": 700,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/ChevySans-BoldItalic.woff2",
+    "weight": 700,
+    "style": "italic"
+   },
+   {
+    "url": "fonts/ChevySans-ExtraBold.woff2",
+    "weight": 800,
+    "style": "normal"
+   }
+  ],
+  "googleName": "Lester Glenn Chevrolet of Freehold",
+  "name": "Chevrolet of Freehold",
+  "orgName": "Lester Glenn Chevrolet of Freehold",
+  "reviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x89c3d566576fb6b3:0xfab3000ca2bb1969!12e1?source=g.page.m.ia._&laa=nmx-review-solicitation-ia2",
+  "salesDesk": "(732) 240-8836",
+  "salesLine": "(732) 810-0164",
+  "slogan": "EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!",
+  "textLine": "(833) 435-0597",
+  "waveA": "#3871c1",
+  "waveB": "#ecc527",
+  "waveC": "#363a38",
+  "website": "https://www.lesterglennchevroletfreehold.com"
+ },
+ {
+  "id": "chevrolet-old-bridge",
+  "accent": "#b89500",
+  "address": "1292 Route 9 S, Old Bridge, NJ 08857",
+  "brandLogo": "logos/chevrolet-old-bridge-brand.webp",
+  "category": "Chevrolet dealer in Old Bridge, NJ",
+  "contactName": "#1f6fc1",
+  "dealerLogo": "logos/chevrolet-old-bridge-dealer.webp",
+  "deskPrimary": "#0072bc",
+  "deskSecondary": "#60c1ef",
+  "fontName": "Chevy Sans",
+  "fonts": [
+   {
+    "url": "fonts/ChevySans-Regular.woff2",
+    "weight": 400,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/ChevySans-Italic.woff2",
+    "weight": 400,
+    "style": "italic"
+   },
+   {
+    "url": "fonts/ChevySans-Medium.woff2",
+    "weight": 500,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/ChevySans-Bold.woff2",
+    "weight": 700,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/ChevySans-BoldItalic.woff2",
+    "weight": 700,
+    "style": "italic"
+   },
+   {
+    "url": "fonts/ChevySans-ExtraBold.woff2",
+    "weight": 800,
+    "style": "normal"
+   }
+  ],
+  "googleName": "Lester Glenn Chevrolet Of Old Bridge",
+  "name": "Chevrolet of Old Bridge",
+  "orgName": "Lester Glenn Chevrolet of Old Bridge",
+  "reviewUrl": "https://g.page/r/CTE2CX1FBG2mEBM/review",
+  "salesDesk": "(732) 916-2600",
+  "salesLine": "(732) 385-9325",
+  "slogan": "EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!",
+  "textLine": "(833) 903-2029",
+  "waveA": "#3871c1",
+  "waveB": "#ecc527",
+  "waveC": "#363a38",
+  "website": "https://www.lesterglennchevroletoldbridge.com"
+ },
+ {
+  "id": "collision",
+  "accent": "#3479c3",
+  "address": "1501 NJ-37, Toms River, NJ 08755",
+  "brandLogo": "",
+  "category": "Auto repair shop in Toms River, NJ",
+  "contactName": "#0772bc",
+  "dealerLogo": "logos/collision-dealer.webp",
+  "deskPrimary": "#0772bc",
+  "deskSecondary": "#60c1ef",
+  "googleName": "Lester Glenn Collision Center",
+  "name": "Collision Center",
+  "orgName": "Lester Glenn Collision Center",
+  "reviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x89c19c25469d2d57:0x4b314b1da1c5eb7b!12e1?source=g.page.m.ia._&laa=nmx-review-solicitation-ia2",
+  "serviceOnly": true,
+  "slogan": "EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!",
+  "textLine": "(855) 837-0318",
+  "waveA": "#0772bc",
+  "waveB": "#b9bcc4",
+  "waveC": "#0772bc",
+  "website": ""
+ },
+ {
+  "id": "ford",
+  "accent": "#0c1634",
+  "address": "900 NJ-35, Ocean Township, NJ 07712",
+  "brandLogo": "logos/ford-brand.webp",
+  "category": "Ford dealer in Ocean Township, NJ",
+  "contactName": "#0c1634",
+  "dealerLogo": "logos/ford-dealer.webp",
+  "deskPrimary": "#0c1634",
+  "deskSecondary": "#6b7fb8",
+  "fontName": "Ford Antenna",
+  "fonts": [
+   {
+    "url": "fonts/FordAntennaWGL-Regular.woff2",
+    "weight": 400,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/FordAntennaWGL-Medium.woff2",
+    "weight": 500,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/FordAntennaWGL-Bold.woff2",
+    "weight": 700,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/FordAntennaWGL-Black.woff2",
+    "weight": 900,
+    "style": "normal"
+   }
+  ],
+  "googleName": "Lester Glenn Ford",
+  "name": "Ford (Ocean)",
+  "orgName": "Lester Glenn Ford",
+  "reviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x89c228a499e56a29:0xf35bec2052170e8c!12e1?source=g.page.m.ia._&laa=nmx-review-solicitation-ia2",
+  "salesDesk": "(732) 775-1500",
+  "salesLine": "(732) 838-9601",
+  "slogan": "EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!",
+  "textLine": "(855) 586-1790",
+  "waveA": "#0c1634",
+  "waveB": "#bbbcd8",
+  "waveC": "#0c1634",
+  "website": "https://www.lesterglennford.net"
+ },
+ {
+  "id": "gmc",
+  "accent": "#a21219",
+  "address": "230 NJ-37, Toms River, NJ 08753",
+  "brandLogo": "logos/gmc-brand.webp",
+  "category": "GMC dealer in Toms River, NJ",
+  "contactName": "#9e1218",
+  "dealerLogo": "logos/gmc-dealer.webp",
+  "deskPrimary": "#a21219",
+  "deskSecondary": "#e0545a",
+  "fontName": "Stratum GMC",
+  "fonts": [
+   {
+    "url": "fonts/StratumGMC-Regular.woff2",
+    "weight": 400,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/StratumGMC-Medium.woff2",
+    "weight": 500,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/StratumGMC-Bold.woff2",
+    "weight": 700,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/StratumGMC-Black.woff2",
+    "weight": 900,
+    "style": "normal"
+   }
+  ],
+  "googleName": "Lester Glenn GMC",
+  "name": "GMC (Toms River)",
+  "orgName": "Lester Glenn GMC",
+  "reviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x89c19dc63d87aaeb:0xd912d312aeed6da4!12e1?source=g.page.m.ia._&laa=nmx-review-solicitation-ia2",
+  "salesDesk": "(732) 240-8830",
+  "salesLine": "(732) 479-8122",
+  "slogan": "EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!",
+  "textLine": "(844) 940-4476",
+  "waveA": "#cf1c2c",
+  "waveB": "#363c46",
+  "waveC": "#9e1218",
+  "website": "https://www.lesterglenngmc.com"
+ },
+ {
+  "id": "honda",
+  "accent": "#3479c3",
+  "address": "2110 NJ-35, Sea Girt, NJ 08750",
+  "brandLogo": "logos/honda-brand.webp",
+  "category": "Honda dealer in Wall Township, NJ",
+  "contactName": "#3478c3",
+  "dealerLogo": "logos/honda-dealer.webp",
+  "deskPrimary": "#3479c3",
+  "deskSecondary": "#8cc3ee",
+  "googleName": "Lester Glenn Honda",
+  "name": "Honda (Sea Girt)",
+  "orgName": "Lester Glenn Honda",
+  "reviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x89c187b9782b0739:0x98253f17a7a3bba2!12e1?source=g.page.m.ia._&laa=nmx-review-solicitation-ia2",
+  "salesDesk": "(732) 974-2211",
+  "salesLine": "(732) 838-5584",
+  "slogan": "EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!",
+  "textLine": "(833) 453-1988",
+  "waveA": "#3478c3",
+  "waveB": "#bcbebe",
+  "waveC": "#3478c3",
+  "website": "https://www.lesterglennhonda.com"
+ },
+ {
+  "id": "hyundai",
+  "accent": "#142e5d",
+  "address": "386 NJ-37, Toms River, NJ 08753",
+  "brandLogo": "logos/hyundai-brand.webp",
+  "category": "Hyundai dealer in Toms River, NJ",
+  "contactName": "#142e5d",
+  "dealerLogo": "logos/hyundai-dealer.webp",
+  "deskPrimary": "#142e5d",
+  "deskSecondary": "#6f8fc6",
+  "fontName": "Hyundai Sans",
+  "fonts": [
+   {
+    "url": "fonts/HyundaiSansTextOffice-Regular.woff2",
+    "weight": 400,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/HyundaiSansTextOffice-Italic.woff2",
+    "weight": 400,
+    "style": "italic"
+   },
+   {
+    "url": "fonts/HyundaiSansHeadOffice-Regular.woff2",
+    "weight": 500,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/HyundaiSansTextOffice-Bold.woff2",
+    "weight": 700,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/HyundaiSansHeadOffice-Bold.woff2",
+    "weight": 800,
+    "style": "normal"
+   }
+  ],
+  "googleName": "Lester Glenn Hyundai",
+  "name": "Hyundai (Toms River)",
+  "orgName": "Lester Glenn Hyundai",
+  "reviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x89c19c330327e07d:0x7786f74818096616!12e1?source=g.page.m.ia._&laa=nmx-review-solicitation-ia2",
+  "salesDesk": "(732) 240-8833",
+  "salesLine": "(732) 527-4125",
+  "slogan": "EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!",
+  "textLine": "(833) 410-1717",
+  "waveA": "#142e5d",
+  "waveB": "#b9bcc4",
+  "waveC": "#142e5d",
+  "website": ""
+ },
+ {
+  "id": "mazda",
+  "accent": "#1c1c1d",
+  "address": "101 NJ-37, Toms River, NJ 08753",
+  "brandLogo": "logos/mazda-brand.webp",
+  "category": "Mazda dealer in Toms River, NJ",
+  "contactName": "#212223",
+  "dealerLogo": "logos/mazda-dealer.webp",
+  "deskPrimary": "#1c1c1d",
+  "deskSecondary": "#8a8b8f",
+  "fontName": "Mazda Type",
+  "fonts": [
+   {
+    "url": "fonts/MazdaType-Regular.woff2",
+    "weight": 400,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/MazdaType-Italic.woff2",
+    "weight": 400,
+    "style": "italic"
+   },
+   {
+    "url": "fonts/MazdaType-Medium.woff2",
+    "weight": 500,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/MazdaType-MediumItalic.woff2",
+    "weight": 500,
+    "style": "italic"
+   },
+   {
+    "url": "fonts/MazdaType-Bold.woff2",
+    "weight": 700,
+    "style": "normal"
+   },
+   {
+    "url": "fonts/MazdaType-BoldItalic.woff2",
+    "weight": 700,
+    "style": "italic"
+   }
+  ],
+  "googleName": "Lester Glenn Mazda",
+  "hidePencil": true,
+  "hideStars": true,
+  "name": "Mazda (Toms River)",
+  "orgName": "Lester Glenn Mazda",
+  "reviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x89c19bdaddcc2b2b:0xf2cf40ffdc198b92!12e1?source=g.page.m.ia._&laa=nmx-review-solicitation-ia2",
+  "salesDesk": "(732) 240-8834",
+  "salesLine": "(732) 479-7891",
+  "slogan": "EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!",
+  "textLine": "(833) 620-2193",
+  "waveA": "#212223",
+  "waveB": "#060504",
+  "waveC": "#97989c",
+  "website": "https://www.lesterglennmazda.com"
+ },
+ {
+  "id": "subaru",
+  "accent": "#24307c",
+  "address": "1501 NJ-37, Toms River, NJ 08755",
+  "brandLogo": "logos/subaru-brand.webp",
+  "category": "Subaru dealer in Toms River, NJ",
+  "contactName": "#1e3e81",
+  "dealerLogo": "logos/subaru-dealer.webp",
+  "deskPrimary": "#24307c",
+  "deskSecondary": "#7d8fd1",
+  "googleName": "Lester Glenn Subaru",
+  "name": "Subaru (Toms River)",
+  "orgName": "Lester Glenn Subaru",
+  "reviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x89c19c25469d2d57:0xd776a9828bf5d5cf!12e1?source=g.page.m.ia._&laa=nmx-review-solicitation-ia2",
+  "salesDesk": "(732) 240-8835",
+  "salesLine": "(732) 479-8570",
+  "slogan": "EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!",
+  "textLine": "(844) 976-4381",
+  "waveA": "#1e3e81",
+  "waveB": "#b9b9bf",
+  "waveC": "#1e3e81",
+  "website": "https://www.lesterglennsubaru.com"
+ }
+]

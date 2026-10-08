@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lester Glenn Flier Studio</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%E2%AD%90</text></svg>">
+<style>
+@font-face{font-family:Rubik;font-style:normal;font-weight:400;font-display:swap;src:url(vendor/rubik/rubik-400-normal.woff2) format('woff2')}
+@font-face{font-family:Rubik;font-style:normal;font-weight:500;font-display:swap;src:url(vendor/rubik/rubik-500-normal.woff2) format('woff2')}
+@font-face{font-family:Rubik;font-style:normal;font-weight:700;font-display:swap;src:url(vendor/rubik/rubik-700-normal.woff2) format('woff2')}
+@font-face{font-family:Rubik;font-style:normal;font-weight:800;font-display:swap;src:url(vendor/rubik/rubik-800-normal.woff2) format('woff2')}
+@font-face{font-family:Rubik;font-style:italic;font-weight:400;font-display:swap;src:url(vendor/rubik/rubik-400-italic.woff2) format('woff2')}
+@font-face{font-family:Rubik;font-style:italic;font-weight:700;font-display:swap;src:url(vendor/rubik/rubik-700-italic.woff2) format('woff2')}
+</style>
+<script src="vendor/qrcode.js"></script>
+<script src="vendor/jspdf.umd.min.js"></script>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --brand:#0772bc; --brand-ink:#ffffff; --brand-soft:#e3eff8;
+  --bg:#eef1f4; --panel:#ffffff; --ink:#1c2630; --muted:#5b6672; --line:#d5dbe1;
+  --field:#f7f9fb; --danger:#b3261e; --ok:#1f7a3d; --paper-shadow:0 1px 2px rgba(20,30,40,.12),0 12px 32px rgba(20,30,40,.14);
+  font-family:Rubik,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --brand:#4aa3e0; --brand-ink:#06131d; --brand-soft:#16293a;
+    --bg:#11171d; --panel:#1a222a; --ink:#e6ebf0; --muted:#9aa7b3; --line:#2c3843;
+    --field:#141b21; --danger:#f2847c; --ok:#6fcf8e; --paper-shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --brand:#4aa3e0; --brand-ink:#06131d; --brand-soft:#16293a;
+  --bg:#11171d; --panel:#1a222a; --ink:#e6ebf0; --muted:#9aa7b3; --line:#2c3843;
+  --field:#141b21; --danger:#f2847c; --ok:#6fcf8e; --paper-shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px rgba(0,0,0,.45);
+}
+*,*::before,*::after{box-sizing:inherit}
+[hidden]{display:none !important}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.45}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+
+.topbar{background:#0772bc;color:#fff;display:flex;align-items:center;gap:20px;padding:14px 24px;flex-wrap:wrap}
+.topbar h1{margin:0;font-size:20px;font-weight:800;letter-spacing:.2px}
+.topbar .sub{opacity:.85;font-size:14px}
+.tabs{margin-left:auto;display:flex;gap:4px;background:rgba(255,255,255,.14);padding:4px;border-radius:10px}
+.tabs button{border:0;background:transparent;color:#fff;padding:7px 16px;border-radius:7px;cursor:pointer;font-weight:500}
+.tabs button[aria-selected="true"]{background:#fff;color:#0772bc}
+
+main{max-width:1280px;margin:0 auto;padding:24px}
+.view[hidden]{display:none}
+.studio{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:24px;align-items:start}
+@media (max-width:860px){.studio{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.panel h2{margin:0 0 4px;font-size:17px;font-weight:700}
+.panel p.hint{margin:0 0 16px;color:var(--muted);font-size:13.5px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.field label,.field .lbl{font-weight:500;font-size:14px}
+.field small{color:var(--muted);font-size:12.5px}
+input[type=text],input[type=url],select,textarea{background:var(--field);border:1px solid var(--line);border-radius:9px;padding:9px 11px;width:100%}
+textarea{min-height:120px;resize:vertical;line-height:1.5}
+.seg{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.seg button{border:1px solid var(--line);background:var(--field);border-radius:9px;padding:9px 6px;cursor:pointer;font-size:13.5px;font-weight:500;line-height:1.25}
+.seg button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn{border:1px solid var(--brand);background:var(--brand);color:var(--brand-ink);padding:10px 16px;border-radius:9px;font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--brand)}
+.btn.danger{background:transparent;color:var(--danger);border-color:var(--danger)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.status{font-size:13.5px;min-height:20px;margin-top:10px;color:var(--muted)}
+.status.err{color:var(--danger)} .status.ok{color:var(--ok)}
+
+.stage{display:flex;flex-direction:column;align-items:center;gap:14px}
+.paper{width:100%;max-width:620px;aspect-ratio:1545/2000;transition:aspect-ratio .2s;background:#fff;box-shadow:var(--paper-shadow);border-radius:3px;overflow:hidden}
+.paper canvas,.paper img{width:100%;height:100%;display:block}
+.pager[hidden]{display:none}
+.pager{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:14px}
+.pager button{border:1px solid var(--line);background:var(--panel);border-radius:8px;width:36px;height:32px;cursor:pointer}
+.recent{margin-top:4px;border-top:1px solid var(--line);padding-top:16px}
+.recent h3{margin:0 0 8px;font-size:14px;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.step{display:flex;align-items:center;gap:10px;margin:20px 0 10px}
+.panel > .step:first-child{margin-top:0}
+.step h2{margin:0;font-size:16px}
+.step .num{width:26px;height:26px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none}
+.seg.types button{text-align:left;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.seg.types button small{font-weight:400;font-size:12px;opacity:.85}
+.seg.types button.wide{grid-column:1 / -1}
+.lockline{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--field);border:1px solid var(--line);border-radius:9px;padding:9px 11px}
+.lockline button{border:0;background:transparent;color:var(--brand);font-weight:600;cursor:pointer;padding:0}
+.ready{border-radius:10px;padding:10px 14px;font-size:14px;margin-bottom:12px;border:1px solid var(--line)}
+.ready.ok{background:var(--brand-soft);border-color:transparent}
+.ready.bad{border-color:var(--danger)}
+.ready ul{margin:6px 0 0;padding-left:18px}
+.ready li{margin:2px 0}
+.muted{color:var(--muted);font-weight:400}
+.recent{border-top:0;padding-top:0;margin-bottom:12px}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px 14px 4px;margin-bottom:10px;background:var(--panel)}
+.card[data-active="true"]{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-weight:700;font-size:14px}
+.card-head button{border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:13px;padding:4px 6px;border-radius:6px}
+.card .field{margin-bottom:10px}
+.card .grid2{grid-template-columns:1fr 1fr}
+.card .grid2 .field.full{grid-column:1 / -1}
+.card input.invalid{border-color:var(--danger)}
+.email-auto{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.email-auto button{border:0;background:transparent;color:var(--brand);cursor:pointer;padding:0;font:inherit;font-weight:500;text-decoration:underline}
+.card .err{color:var(--danger);font-size:12.5px;min-height:0}
+.saves{font-size:12.5px;color:var(--muted);margin:2px 0 14px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--field);border-radius:999px;padding:4px 6px 4px 12px;font-size:13px}
+.chip button{border:0;background:transparent;cursor:pointer;padding:2px 6px;border-radius:999px;color:var(--muted)}
+.chip .add{color:var(--brand);font-weight:700}
+.empty{color:var(--muted);font-size:13.5px}
+
+.stores{display:grid;grid-template-columns:minmax(220px,280px) 1fr;gap:24px;align-items:start}
+@media (max-width:860px){.stores{grid-template-columns:1fr}}
+.storelist{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:6px}
+.storelist button{width:100%;text-align:left;border:1px solid var(--line);background:var(--field);border-radius:9px;padding:10px 12px;cursor:pointer}
+.storelist button[aria-current="true"]{border-color:var(--brand);background:var(--brand-soft)}
+.storelist .meta{display:block;color:var(--muted);font-size:12.5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media (max-width:600px){.grid2{grid-template-columns:1fr}}
+.colors{display:flex;gap:16px;flex-wrap:wrap}
+.colors label{display:flex;align-items:center;gap:8px;font-size:13.5px}
+input[type=color]{width:42px;height:32px;border:1px solid var(--line);border-radius:6px;padding:2px;background:var(--field)}
+.logo-slot{display:flex;align-items:center;gap:12px}
+.logo-slot .thumb{width:140px;height:64px;border:1px dashed var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden}
+.logo-slot .thumb img{max-width:100%;max-height:100%}
+.notice{background:var(--brand-soft);border-radius:10px;padding:10px 14px;font-size:13.5px;margin-bottom:16px}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>Review Flier Studio</h1>
+    <div class="sub">Lester Glenn Auto Group</div>
+  </div>
+</header>
+
+<main>
+  <div id="dbNotice" class="notice" hidden></div>
+
+  <section class="view" id="view-make">
+    <div class="studio">
+      <div class="panel">
+        <div class="step"><span class="num">1</span><h2>Pick your store</h2></div>
+        <div class="field">
+          <select id="storeSel" aria-label="Store"></select>
+        </div>
+
+        <div class="step"><span class="num">2</span><h2>Pick your department</h2></div>
+        <div class="field" id="deptField">
+          <div class="seg" id="deptSeg">
+            <button type="button" data-dept="service" aria-pressed="true">Service</button>
+            <button type="button" data-dept="sales" aria-pressed="false">Sales</button>
+          </div>
+          <small id="deptNote" hidden>This store only has a service department.</small>
+        </div>
+
+        <div class="step"><span class="num">3</span><h2>Who is it for?</h2></div>
+        <p class="hint" style="margin-top:-4px">Phone numbers fill in from the store when it has them. The email is built from the name; type over it if theirs is different. This info is used on everything you make below.</p>
+        <div id="contactFields">
+          <div id="cardList"></div>
+          <button type="button" class="btn ghost" id="addCardBtn" style="width:100%;margin-bottom:6px">+ Add another person</button>
+          <datalist id="titleOptions"><option value="Service Advisor"><option value="Service Manager"><option value="Service Director"><option value="Sales Consultant"><option value="Sales Manager"><option value="Parts Advisor"><option value="Finance Manager"></datalist>
+        </div>
+
+        <div class="step"><span class="num">4</span><h2>What are you making?</h2></div>
+        <div class="seg types" id="typeSeg">
+          <button type="button" data-type="review" aria-pressed="true"><b>Review flier</b><small>Letter size, asks for a Google review</small></button>
+          <button type="button" data-type="desk" aria-pressed="false" id="deskBtn"><b>Sales desk sign</b><small>Letter size, no name on it</small></button>
+          <button type="button" data-type="contact" aria-pressed="false"><b>Contact card</b><small>8 x 10, QR saves their contact</small></button>
+          <button type="button" data-type="biz" aria-pressed="false"><b>Business card</b><small>3.5 x 2, front and back or one sided</small></button>
+        </div>
+        <div class="grid2" id="bizFields" hidden style="margin-top:12px">
+          <div class="field"><label for="bizQr">QR code</label>
+            <select id="bizQr"><option value="contact">Save my contact</option><option value="review">Leave a Google review</option></select></div>
+          <div class="field"><label for="bizSides">Sides</label>
+            <select id="bizSides"><option value="two">Front and back</option><option value="one">One sided (QR on the front)</option></select></div>
+        </div>
+        <div class="saves" id="savesLine"></div>
+
+        <div class="step"><span class="num" id="dlNum">5</span><h2>Download</h2></div>
+        <div class="ready" id="readyBox"></div>
+        <div class="row">
+          <button class="btn" id="pdfBtn">Download PDF</button>
+          <button class="btn ghost" id="pngBtn">Download image (PNG)</button>
+        </div>
+        <div class="status" id="makeStatus"></div>
+      </div>
+
+      <div class="stage">
+        <div class="paper" id="paper"></div>
+        <div class="pager" id="pager" hidden>
+          <button type="button" id="prevBtn" aria-label="Previous name">&lsaquo;</button>
+          <span id="pageLbl"></span>
+          <button type="button" id="nextBtn" aria-label="Next name">&rsaquo;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="view-stores" hidden>
+    <div class="stores">
+      <div class="panel">
+        <h2>Store settings</h2>
+        <p class="hint">Set each rooftop up once. Every flier pulls from here. Only change these if something about the store itself is wrong.</p>
+        <ul class="storelist" id="storeList"></ul>
+        <button class="btn ghost" id="newStoreBtn">Add a store</button>
+      </div>
+      <div class="panel" id="storeForm">
+        <h2 id="formTitle">Store setup</h2>
+        <p class="hint">The Google review link comes from the store's Google Business Profile: Home, then "Ask for reviews". It looks like https://g.page/r/.../review</p>
+        <div class="grid2">
+          <div class="field"><label for="fName">Short name (for this tool)</label><input type="text" id="fName" placeholder="Chevrolet of Old Bridge"></div>
+          <div class="field"><label for="fGoogle">Name as it appears on Google</label><input type="text" id="fGoogle" placeholder="Lester Glenn Chevrolet Of Old Bridge"></div>
+          <div class="field"><label for="fCategory">Google category line</label><input type="text" id="fCategory" placeholder="Chevrolet dealer in Old Bridge, NJ"></div>
+          <div class="field"><label for="fAddress">Street address</label><input type="text" id="fAddress" placeholder="1292 Route 9 S, Old Bridge, NJ 08857"></div>
+        </div>
+        <div class="field">
+          <label for="fUrl">Google review link</label>
+          <div class="row" style="flex-wrap:nowrap">
+            <input type="url" id="fUrl" placeholder="https://g.page/r/XXXX/review">
+            <a class="btn ghost" id="testLink" href="#" target="_blank" rel="noopener" style="text-decoration:none;white-space:nowrap">Test link</a>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label for="fText">Service Phone Number For Texting</label><input type="text" id="fText" placeholder="(844) 740-0772"><small>Default for service contact and business cards.</small></div>
+          <div class="field full" style="grid-column:1 / -1"><label style="display:flex;align-items:center;gap:8px;font-weight:500"><input type="checkbox" id="fServiceOnly"> Service only (no sales department)</label></div>
+          <div class="field"><label for="fSalesDesk">Sales desk phone</label><input type="text" id="fSalesDesk" placeholder="(732) 240-8831"><small>Fills the desk phone on sales cards. Each person's extension is added to it.</small></div>
+          <div class="field"><label for="fSales">Sales Phone Number To Text Message</label><input type="text" id="fSales" placeholder="(732) 338-0793"><small>Default texting number for sales cards.</small></div>
+          <div class="field"><label for="fWeb">Website</label><input type="url" id="fWeb" placeholder="https://www.lesterglennchevrolet.com"></div>
+          <div class="field"><label for="fOrg">Company name saved to phones</label><input type="text" id="fOrg" placeholder="Lester Glenn Chevrolet"><small>Leave blank to use the Google name.</small></div>
+        </div>
+        <div class="field"><label for="fSlogan">Sales desk footer line</label><input type="text" id="fSlogan" placeholder="EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!"></div>
+        <div class="field">
+          <span class="lbl">Colors</span>
+          <div class="colors">
+            <label><input type="color" id="cAccent"> Advisor and consultant fliers</label>
+            <label><input type="color" id="cDesk"> Sales desk main</label>
+            <label><input type="color" id="cDesk2"> Sales desk bubble</label>
+          </div>
+          <div class="colors" style="margin-top:10px">
+            <label><input type="color" id="cName"> Contact card name</label>
+            <label><input type="color" id="cWaveA"> Contact main wave</label>
+            <label><input type="color" id="cWaveB"> Contact top accent</label>
+            <label><input type="color" id="cWaveC"> Contact bottom accent</label>
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px"><input type="checkbox" id="fNoStars"> Leave the star graphics off this store's review fliers</label>
+          <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px"><input type="checkbox" id="fNoPencil"> Leave the pencil icon off the Write A Review button</label>
+        </div>
+        <div class="field" id="fontField">
+          <span class="lbl">Brand font</span>
+          <div class="row" style="align-items:center"><span id="fontStatus" class="empty">Using the standard font.</span>
+            <button type="button" class="btn ghost" id="fontClear" style="padding:5px 12px;font-size:13px" hidden>Use standard font</button></div>
+          <input type="file" id="upFont" multiple accept=".otf,.ttf,.woff,.woff2,font/otf,font/ttf,font/woff,font/woff2">
+          <small id="fontHint">Upload every weight at once (Regular, Medium, Bold, Italic...). Weights are read from the file names. Fonts stay private to your organization.</small>
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <span class="lbl">Store logo</span>
+            <div class="logo-slot"><div class="thumb" id="tDealer"></div><input type="file" id="upDealer" accept="image/png,image/webp,image/jpeg,image/svg+xml"></div>
+            <small>Transparent PNG works best.</small>
+          </div>
+          <div class="field">
+            <span class="lbl">Brand logo</span>
+            <div class="logo-slot"><div class="thumb" id="tBrand"></div><input type="file" id="upBrand" accept="image/png,image/webp,image/jpeg,image/svg+xml"></div>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn" id="saveStoreBtn">Save store</button>
+          <button class="btn danger" id="delStoreBtn">Delete store</button>
+        </div>
+        <div class="status" id="storeStatus"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+"use strict";
+/* ---------- constants ---------- */
+const W = 1545, H = 2000;
+const TYPES = {
+  service: { title: "Service Advisor" },
+  sales:   { title: "Sales Consultant" },
+  desk:    { title: "" },
+  contact: { title: "Service Advisor" },
+  biz:     { title: "Service Advisor" }
+};
+const CW = 1200, CH = 1500; /* contact card: 8 x 10 in */
+const BW = 1125, BH = 675, BLEED = 37.5; /* business card: 3.75 x 2.25 in at 300 dpi, trims to 3.5 x 2 in */
+const BGAP = 60;
+const isCardMode = () => state.type === "contact" || state.type === "biz";
+const DEFAULT_STORE = {
+  name:"", googleName:"", category:"", address:"", reviewUrl:"",
+  slogan:"EXPERIENCE THE WAY CAR BUYING SHOULD BE, EXPERIENCE LESTER GLENN!",
+  accent:"#0772bc", deskPrimary:"#0772bc", deskSecondary:"#60c1ef",
+  dealerLogo:"", brandLogo:"",
+  textLine:"", website:"", orgName:"",
+  contactName:"#0772bc", waveA:"#0772bc", waveB:"#b9bcc4", waveC:"#0772bc"
+};
+const EMAIL_DOMAIN = "lesterglenn.com";
+
+/* ---------- state ---------- */
+let db = null, downloads = null, assets = null;
+let stores = [];          // [{id, ...}]
+let people = [];          // [{id, name, title, type, storeId, created}]
+let state = { storeId:null, type:"service", page:0 };
+let editing = null;       // store being edited (clone)
+const imgCache = new Map();
+
+const $ = id => document.getElementById(id);
+function setStatus(el, msg, kind){ el.textContent = msg || ""; el.className = "status" + (kind ? " " + kind : ""); }
+
+/* ---------- local fallback ---------- */
+const LS_KEY = "lg-review-flier-stores";
+function lsLoad(){ try{ return JSON.parse(localStorage.getItem(LS_KEY) || "[]"); }catch(e){ return []; } }
+function lsSave(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(stores)); }catch(e){} }
+
+/* ---------- images ---------- */
+function loadImg(src){
+  if(!src) return Promise.resolve(null);
+  if(imgCache.has(src)) return imgCache.get(src);
+  const p = new Promise(res => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = src; });
+  imgCache.set(src, p); return p;
+}
+
+/* ---------- drawing helpers ---------- */
+let curFamily = null; /* brand font for the store being drawn */
+const F = (w, s, italic) => `${italic ? "italic " : ""}${w} ${s}px ${curFamily ? `"${curFamily}", ` : ""}Rubik, "Segoe UI", Arial, sans-serif`;
+const fontCache = new Map();
+function storeFontKey(st){ return (st.fonts || []).map(f => f.url + f.weight + f.style).join("|"); }
+async function loadStoreFont(st){
+  if(!st || !Array.isArray(st.fonts) || !st.fonts.length) return null;
+  const key = storeFontKey(st);
+  if(fontCache.has(key)) return fontCache.get(key);
+  const family = "Brand " + (st.id || "store") + " " + Math.abs([...key].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 7));
+  const p = Promise.all(st.fonts.map(async f => {
+    try{ const face = new FontFace(family, `url("${f.url}")`, { weight:String(f.weight || 400), style:f.style || "normal" }); await face.load(); document.fonts.add(face); return true; }
+    catch(e){ return false; }
+  })).then(r => r.some(Boolean) ? family : null);
+  fontCache.set(key, p); return p;
+}
+function fontFromFile(name){
+  const n = name.toLowerCase().replace(/[\s_\-]+/g, "");
+  const style = /italic|oblique/.test(n) ? "italic" : "normal";
+  const table = [["hairline",100],["thin",100],["extralight",200],["ultralight",200],["semilight",300],["light",300],["book",400],["regular",400],["medium",500],["semibold",600],["demibold",600],["extrabold",800],["ultrabold",800],["heavy",900],["black",900],["bold",700]];
+  let weight = 400; for(const [k, w] of table){ if(n.includes(k)){ weight = w; break; } }
+  return { weight, style };
+}
+function rr(ctx, x, y, w, h, r){
+  ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+}
+function fitSize(ctx, text, weight, start, min, maxW, italic){
+  let s = start;
+  while(s > min){ ctx.font = F(weight, s, italic); if(ctx.measureText(text).width <= maxW) break; s -= 1; }
+  return s;
+}
+function wrapPlain(ctx, text, maxW){
+  const words = String(text).split(/\s+/).filter(Boolean), lines = []; let cur = "";
+  for(const w of words){ const t = cur ? cur + " " + w : w; if(ctx.measureText(t).width <= maxW || !cur) cur = t; else { lines.push(cur); cur = w; } }
+  if(cur) lines.push(cur); return lines;
+}
+function drawImgContain(ctx, img, x, y, w, h, align){
+  if(!img) return;
+  const r = Math.min(w / img.width, h / img.height), dw = img.width * r, dh = img.height * r;
+  const dx = align === "right" ? x + w - dw : x + (w - dw) / 2;
+  ctx.drawImage(img, dx, y + (h - dh) / 2, dw, dh);
+}
+/* rich text: runs = [{t, w(eight), c(olor)}], centered at cx */
+function layoutRich(ctx, runs, size, maxW, base){
+  const toks = [];
+  runs.forEach(r => r.t.split(/(\s+)/).forEach(p => { if(p) toks.push({ t:p, w:r.w || 400, c:r.c || base, sp:/^\s+$/.test(p) }); }));
+  const lines = []; let line = [], lw = 0;
+  const meas = tk => { ctx.font = F(tk.w, size); return ctx.measureText(tk.sp ? " " : tk.t).width; };
+  for(const tk of toks){
+    const m = meas(tk);
+    if(tk.sp){ if(line.length){ line.push({...tk, m}); lw += m; } continue; }
+    if(lw + m > maxW && line.length){
+      while(line.length && line[line.length-1].sp){ lw -= line.pop().m; }
+      lines.push({ toks:line, w:lw }); line = []; lw = 0;
+    }
+    line.push({...tk, m}); lw += m;
+  }
+  while(line.length && line[line.length-1].sp){ lw -= line.pop().m; }
+  if(line.length) lines.push({ toks:line, w:lw });
+  return lines;
+}
+function drawRichLines(ctx, lines, size, cx, y, lh){
+  for(const ln of lines){
+    let x = cx - ln.w / 2;
+    for(const tk of ln.toks){ if(!tk.sp){ ctx.font = F(tk.w, size); ctx.fillStyle = tk.c; ctx.fillText(tk.t, x, y); } x += tk.m; }
+    y += lh;
+  }
+  return y;
+}
+function drawQR(ctx, url, x, y, size, color, ecl){
+  if(!url || typeof qrcode !== "function"){
+    ctx.fillStyle = "#f1f1f1"; ctx.fillRect(x, y, size, size);
+    ctx.fillStyle = "#888"; ctx.font = F(500, 28); ctx.textAlign = "center";
+    ctx.fillText(url ? "QR library did not load" : "Add the review link", x + size/2, y + size/2);
+    ctx.textAlign = "left"; return;
+  }
+  const qr = qrcode(0, ecl || "M"); qr.addData(url); qr.make();
+  const n = qr.getModuleCount(), m = size / n;
+  ctx.fillStyle = color;
+  for(let r = 0; r < n; r++) for(let c = 0; c < n; c++) if(qr.isDark(r, c))
+    ctx.fillRect(Math.floor(x + c*m), Math.floor(y + r*m), Math.ceil(m), Math.ceil(m));
+}
+function isDark(hex){ const h = String(hex || "").replace("#", ""); if(h.length !== 6) return false; const [r, g, b] = [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16) / 255); return 0.2126*r + 0.7152*g + 0.0722*b < 0.42; }
+function star(ctx, cx, cy, R, color){
+  ctx.beginPath();
+  for(let i = 0; i < 10; i++){ const a = -Math.PI/2 + i*Math.PI/5, rad = i % 2 ? R*0.45 : R; ctx.lineTo(cx + rad*Math.cos(a), cy + rad*Math.sin(a)); }
+  ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+}
+function stars(ctx, x, cy, R, gap){ for(let i = 0; i < 5; i++) star(ctx, x + R + i*(2*R+gap), cy, R, "#fff024"); }
+
+/* ---------- personal flier (service advisor / sales consultant) ---------- */
+function drawPersonal(ctx, s, name, title, type, imgs){
+  const A = s.accent || "#b89500", GRAY = "#555", INK = "#111";
+  const nm = name || "Employee Name", tt = title || TYPES[type].title;
+  const roleWord = tt.toLowerCase();
+  ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, H);
+  ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
+
+  /* header: name | title, auto-fit so long names never collide with the logos */
+  const maxHead = 1060 - 72;
+  let ns = 72, ts = 46;
+  for(;;){
+    ctx.font = F(700, ns); const nw = ctx.measureText(nm).width;
+    ctx.font = F(400, ts); const tw = ctx.measureText(tt).width;
+    if(nw + 64 + tw <= maxHead || ns <= 40) break;
+    ns -= 2; ts = Math.max(30, Math.round(ns * 0.64));
+  }
+  ctx.font = F(700, ns); ctx.fillStyle = A; ctx.fillText(nm, 72, 132);
+  const nw = ctx.measureText(nm).width;
+  ctx.fillStyle = INK; ctx.fillRect(72 + nw + 30, 132 - ns*0.92, 5, ns*1.12);
+  ctx.font = F(400, ts); ctx.fillStyle = GRAY; ctx.fillText(tt, 72 + nw + 64, 124);
+
+  ctx.font = F(400, 44, true); ctx.fillStyle = GRAY;
+  ctx.fillText(type === "sales" ? "Did you enjoy your purchase experience?" : "Did you receive excellent service today?", 72, 226);
+
+  /* body copy */
+  const middle = type === "sales"
+    ? ". If you agree that I listened to your needs, made the process easy and treated you with the utmost respect, please mention me, "
+    : ". If you agree that I addressed your concerns, expedited your repair and treated you with the utmost respect, please mention me, ";
+  const paras = [
+    [{t:"My performance here is measured by our customer "},{t:"happiness and satisfaction",w:700,c:INK},{t:middle},{t:nm,w:700,c:A},{t:" in a positive review on Google!"}],
+    [{t:"We love providing you with the "},{t:"Lester Glenn Experience",w:700,c:A},{t:" and truly appreciate when our customers take the time to share their experience with others. Thank you!"}],
+    [{t:"You can leave an honest review of your experience in 3 easy steps!"}]
+  ];
+  let bs = 34, laid;
+  for(;;){
+    const lh = Math.round(bs * 1.47);
+    laid = paras.map((p, k) => layoutRich(ctx, p, bs, k === 2 ? 600 : 790, INK));
+    const h = laid.reduce((a, l) => a + l.length * lh, 0) + 2 * 34;
+    if(h <= 600 || bs <= 26){ laid.lh = lh; break; }
+    bs -= 1;
+  }
+  let y = 300;
+  laid.forEach((l, i) => { y = drawRichLines(ctx, l, bs, 525, y, laid.lh); if(i < 2) y += 34; });
+
+  /* logos */
+  if(imgs.brand){ drawImgContain(ctx, imgs.dealer, 1180, 55, 300, 110, "right"); drawImgContain(ctx, imgs.brand, 1180, 182, 300, 118, "right"); }
+  else drawImgContain(ctx, imgs.dealer, 1120, 70, 360, 200, "right");
+
+  /* QR frame */
+  const fx = 1010, fy = 352, fw = 470, fh = 518;
+  rr(ctx, fx, fy, fw, fh, 44); ctx.fillStyle = A; ctx.fill();
+  rr(ctx, fx + 16, fy + 62, fw - 32, fh - 78, 28); ctx.fillStyle = "#fff"; ctx.fill();
+  rr(ctx, fx + 80, fy - 26, fw - 160, 90, 22); ctx.fillStyle = A; ctx.fill();
+  ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.font = F(700, 54); ctx.fillText("SCAN ME", fx + fw/2, fy + 38);
+  ctx.textAlign = "left";
+  const qs = 320, qx = fx + (fw - qs)/2, qy = fy + 62 + ((fh - 78) - qs)/2;
+  ctx.strokeStyle = A; ctx.lineWidth = 9; ctx.lineCap = "square";
+  const o = 26, L = 64;
+  [[qx-o,qy-o,1,1],[qx+qs+o,qy-o,-1,1],[qx-o,qy+qs+o,1,-1],[qx+qs+o,qy+qs+o,-1,-1]].forEach(([x0,y0,dx,dy]) => {
+    ctx.beginPath(); ctx.moveTo(x0, y0 + dy*L); ctx.lineTo(x0, y0); ctx.lineTo(x0 + dx*L, y0); ctx.stroke();
+  });
+  drawQR(ctx, s.reviewUrl, qx, qy, qs, "#5a5a5a");
+
+  /* step bands */
+  const bands = [[917, 320], [1253, 310], [1578, 312]];
+  const gName = s.googleName || "Store name on Google";
+  bands.forEach(([top, h], i) => {
+    ctx.fillStyle = "#b6bab9"; ctx.fillRect(0, top, W, h);
+    ctx.beginPath(); ctx.moveTo(0, top); ctx.lineTo(462, top); ctx.lineTo(748, top + h/2); ctx.lineTo(462, top + h); ctx.lineTo(0, top + h); ctx.closePath();
+    ctx.fillStyle = "#ebebeb"; ctx.fill();
+    const cy = top + h/2;
+    ctx.beginPath(); ctx.arc(88, cy, 46, 0, Math.PI*2); ctx.fillStyle = A; ctx.fill();
+    ctx.fillStyle = isDark(A) ? "#fff" : "#2b2b2b"; ctx.font = F(700, 46); ctx.textAlign = "center"; ctx.fillText(String(i + 1), 88, cy + 16); ctx.textAlign = "left";
+  });
+  // step text (left)
+  function leftText(lines, top, h){
+    ctx.font = F(700, 35); ctx.fillStyle = INK;
+    const lh = 45, y0 = top + h/2 - (lines.length * lh)/2 + 33;
+    lines.forEach((l, k) => ctx.fillText(l, 165, y0 + k*lh));
+  }
+  ctx.font = F(700, 35);
+  const s1 = [...wrapPlain(ctx, "Go to Google & search", 420), ...wrapPlain(ctx, "\u201C" + gName + "\u201D", 450), "OR, Scan the QR Code"];
+  leftText(s1, 917, 320);
+  leftText(["Click on \u201CReviews\u201D"], 1253, 310);
+  ctx.font = F(700, 35);
+  leftText(wrapPlain(ctx, "Write an honest review and mention your " + roleWord, 400), 1578, 312);
+
+  // step 1 right: search pill
+  rr(ctx, 785, 1012, 712, 128, 64); ctx.fillStyle = "#fff"; ctx.fill();
+  ctx.strokeStyle = "#222"; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(845, 1068, 20, 0, Math.PI*2); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(860, 1083); ctx.lineTo(880, 1103); ctx.stroke();
+  let ps = fitSize(ctx, gName, 700, 34, 22, 580); ctx.fillStyle = INK; ctx.fillText(gName, 905, 1088);
+
+  // step 2 right
+  ps = fitSize(ctx, gName, 700, 36, 24, 700); ctx.fillStyle = INK; ctx.fillText(gName, 785, 1330);
+  ["Website", "Directions", "Save", "Call"].forEach((b, k) => {
+    const bx = 785 + k*178;
+    rr(ctx, bx, 1365, 164, 50, 12); ctx.fillStyle = "#fff"; ctx.fill();
+    ctx.fillStyle = "#222"; ctx.font = F(400, 26); ctx.textAlign = "center"; ctx.fillText(b, bx + 82, 1399); ctx.textAlign = "left";
+  });
+  const showStars = !s.hideStars;
+  if(showStars) stars(ctx, 785, 1462, 24, 10);
+  if(s.category){ fitSize(ctx, s.category, 400, 29, 20, 700); ctx.fillStyle = "#222"; ctx.fillText(s.category, 785, showStars ? 1525 : 1490); }
+
+  // step 3 right
+  fitSize(ctx, gName, 700, 36, 24, 700); ctx.fillStyle = INK; ctx.fillText(gName, 785, 1660);
+  if(s.address){ fitSize(ctx, s.address, 400, 29, 20, 700); ctx.fillStyle = "#222"; ctx.fillText(s.address, 785, 1730); }
+  if(showStars) stars(ctx, 785, 1806, 24, 10);
+  const wx = showStars ? 0 : -295;
+  ctx.save(); ctx.translate(wx, 0);
+  rr(ctx, 1080, 1770, 360, 70, 12); ctx.fillStyle = "#fff"; ctx.fill();
+  if(!s.hidePencil){
+    ctx.save(); ctx.translate(1128, 1805); ctx.rotate(-Math.PI/4); ctx.fillStyle = "#222";
+    ctx.fillRect(-12, -7, 34, 14); ctx.fillRect(25, -7, 6, 14);
+    ctx.beginPath(); ctx.moveTo(-14, -7); ctx.lineTo(-28, 0); ctx.lineTo(-14, 7); ctx.closePath(); ctx.fill(); ctx.restore();
+    ctx.fillStyle = "#222"; ctx.font = F(400, 28); ctx.fillText("Write A Review", 1170, 1815);
+  } else {
+    ctx.fillStyle = "#222"; ctx.font = F(400, 28); ctx.textAlign = "center"; ctx.fillText("Write A Review", 1260, 1815); ctx.textAlign = "left";
+  }
+  ctx.restore();
+
+  // footer
+  ctx.fillStyle = A; ctx.fillRect(0, 1893, W, H - 1893);
+  const foot = (type === "sales" ? "Thank you for choosing " : "Thank you for servicing your vehicle at ") + gName + "!";
+  fitSize(ctx, foot, 700, 40, 24, W - 80); ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.fillText(foot, W/2, 1960); ctx.textAlign = "left";
+}
+
+/* ---------- sales desk flier ---------- */
+function drawDesk(ctx, s, imgs){
+  const P = s.deskPrimary || "#0072bc", P2 = s.deskSecondary || "#60c1ef";
+  ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, H);
+  ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  ctx.fillStyle = P; ctx.fillRect(0, 0, W, 650);
+
+  const head = ["LOVED YOUR", "LESTER GLENN", "EXPERIENCE?"];
+  let hs = 124; ctx.font = F(800, hs);
+  while(hs > 70 && Math.max(...head.map(h => (ctx.font = F(800, hs), ctx.measureText(h).width))) > 920) hs -= 2;
+  ctx.fillStyle = "#fff"; ctx.font = F(800, hs);
+  head.forEach((h, k) => ctx.fillText(h, 105, 180 + k * Math.round(hs * 0.88)));
+
+  // speech bubble
+  rr(ctx, 1055, 75, 380, 265, 46); ctx.fillStyle = P2; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(1120, 330); ctx.lineTo(1215, 330); ctx.lineTo(1130, 418); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.font = F(800, 104);
+  ctx.fillText("TELL", 1245, 197); ctx.fillText("US!", 1245, 303);
+
+  ctx.font = F(700, 42);
+  const subLines = wrapPlain(ctx, "Your feedback helps us serve you better in the future and helps others choose with confidence.", 1180);
+  subLines.forEach((l, k) => ctx.fillText(l, W/2, 520 + k*60));
+  ctx.textAlign = "left";
+
+  // QR frame
+  const fx = 97, fy = 790, fw = 665, fh = 645;
+  ctx.strokeStyle = P; ctx.lineWidth = 16; rr(ctx, fx, fy, fw, fh, 46); ctx.stroke();
+  ctx.font = F(800, 92); const sw = ctx.measureText("SCAN ME").width;
+  ctx.fillStyle = "#fff"; ctx.fillRect(fx + fw/2 - sw/2 - 28, fy - 20, sw + 56, 44);
+  ctx.fillStyle = P; ctx.textAlign = "center"; ctx.fillText("SCAN ME", fx + fw/2, fy + 32); ctx.textAlign = "left";
+  drawQR(ctx, s.reviewUrl, fx + (fw - 500)/2, fy + 100, 500, "#5a5a5a");
+
+  // gray message box
+  ctx.fillStyle = "#f0f0f0"; ctx.fillRect(858, 830, W - 858, 572);
+  ctx.fillStyle = "#555"; ctx.font = F(700, 52);
+  const m1 = wrapPlain(ctx, "Scan here to leave a quick review on our Google page!", 600);
+  let my = 935; m1.forEach(l => { ctx.fillText(l, 910, my); my += 66; });
+  ctx.font = F(400, 52, true); my += 58;
+  wrapPlain(ctx, "It takes less than 60 seconds to complete!", 600).forEach(l => { ctx.fillText(l, 910, my); my += 66; });
+
+  drawImgContain(ctx, imgs.dealer, 180, 1545, 520, 225);
+  drawImgContain(ctx, imgs.brand, 890, 1560, 460, 200);
+
+  ctx.fillStyle = P; ctx.fillRect(0, 1850, W, H - 1850);
+  const slogan = s.slogan || "";
+  fitSize(ctx, slogan, 700, 36, 22, W - 90, true);
+  ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.fillText(slogan, W/2, 1938); ctx.textAlign = "left";
+}
+
+
+/* ---------- contact card ---------- */
+function digits(v){ let d = String(v || "").replace(/\D/g, ""); if(d.length === 11 && d[0] === "1") d = d.slice(1); return d; }
+function fmtPhone(v){ const d = digits(v); return d.length === 10 ? `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}` : String(v || "").trim(); }
+function autoEmail(name){
+  const parts = String(name || "").trim().split(/\s+/).filter(Boolean);
+  if(parts.length < 2) return "";
+  const first = parts[0].replace(/[^A-Za-z]/g, ""), last = parts.slice(1).join("").replace(/[^A-Za-z]/g, "");
+  if(!first || !last) return "";
+  return first[0].toUpperCase() + last[0].toUpperCase() + last.slice(1) + "@" + EMAIL_DOMAIN;
+}
+function parseAddress(a){
+  const m = /^\s*(.+?),\s*(.+?),\s*([A-Za-z]{2})\s+(\d{5})(?:-\d{4})?\s*$/.exec(a || "");
+  return m ? { street:m[1], city:m[2], state:m[3].toUpperCase(), zip:m[4] } : null;
+}
+function vEsc(v){ return String(v || "").replace(/\\/g, "\\\\").replace(/([,;])/g, "\\$1"); }
+function buildVCard(s, p){
+  const parts = p.name.trim().split(/\s+/), first = parts[0] || "", last = parts.slice(1).join(" ");
+  const L = ["BEGIN:VCARD", "VERSION:3.0", `N:${vEsc(last)};${vEsc(first)};;;`, `FN:${vEsc(p.name)}`];
+  L.push(`ORG:${vEsc(s.orgName || s.googleName || "Lester Glenn")}`);
+  if(p.title) L.push(`TITLE:${vEsc(p.title)}`);
+  const desk = digits(p.phone), text = digits(p.text !== undefined ? p.text : s.textLine);
+  const ext = String(p.ext || "").replace(/\D/g, "");
+  const same = !ext && desk.length === 10 && desk === text;
+  if(desk.length === 10) L.push(same ? `TEL;TYPE=CELL,VOICE:+1${desk}` : `TEL;TYPE=WORK,VOICE:+1${desk}${ext ? "," + ext : ""}`);
+  if(text.length === 10 && !same) L.push(`TEL;TYPE=CELL:+1${text}`);
+  if(p.email) L.push(`EMAIL;TYPE=INTERNET,WORK:${p.email}`);
+  if(s.website) L.push(`URL:${/^https?:\/\//i.test(s.website) ? s.website : "https://" + s.website.replace(/^\/+/, "")}`);
+  const a = parseAddress(s.address);
+  if(a) L.push(`ADR;TYPE=WORK:;;${vEsc(a.street)};${vEsc(a.city)};${a.state};${a.zip};USA`);
+  L.push("END:VCARD");
+  return L.join("\r\n");
+}
+function drawWaves(ctx, s){
+  const k = CW / 980, A = s.waveA || "#0772bc", B = s.waveB || "#b9bcc4", C = s.waveC || A;
+  ctx.save(); ctx.scale(k, k);
+  // top: main band
+  ctx.beginPath(); ctx.moveTo(225, 0); ctx.quadraticCurveTo(470, 34, 700, 6); ctx.quadraticCurveTo(880, -6, 980, 62); ctx.lineTo(980, 0); ctx.closePath(); ctx.fillStyle = A; ctx.fill();
+  // top: accent crescent
+  ctx.beginPath(); ctx.moveTo(575, 38); ctx.quadraticCurveTo(820, 24, 980, 128); ctx.lineTo(980, 74); ctx.quadraticCurveTo(820, 4, 575, 38); ctx.closePath(); ctx.fillStyle = B; ctx.fill();
+  // bottom: main mound
+  ctx.beginPath(); ctx.moveTo(0, 1226); ctx.lineTo(0, 1126); ctx.quadraticCurveTo(140, 1102, 290, 1110); ctx.quadraticCurveTo(470, 1128, 600, 1226); ctx.closePath(); ctx.fillStyle = A; ctx.fill();
+  // bottom: swoosh
+  ctx.beginPath(); ctx.moveTo(262, 1110); ctx.quadraticCurveTo(430, 1088, 570, 1160); ctx.quadraticCurveTo(640, 1196, 692, 1226); ctx.lineTo(598, 1226); ctx.quadraticCurveTo(470, 1126, 262, 1110); ctx.closePath(); ctx.fillStyle = C; ctx.fill();
+  // bottom: accent strip
+  ctx.beginPath(); ctx.moveTo(0, 1226); ctx.lineTo(0, 1203); ctx.quadraticCurveTo(160, 1198, 300, 1226); ctx.closePath(); ctx.fillStyle = B; ctx.fill();
+  ctx.restore();
+}
+function drawContact(ctx, s, p, imgs){
+  const NC = s.contactName || s.waveA || "#0772bc", INK = "#111";
+  ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, CW, CH);
+  ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  drawWaves(ctx, s);
+
+  const hs = Math.min(fitSize(ctx, "Throughout Your Visit!", 800, 94, 60, 1000), 94);
+  ctx.font = F(800, hs); ctx.fillStyle = INK;
+  ctx.fillText("Stay Connected", 56, 196); ctx.fillText("Throughout Your Visit!", 56, 196 + Math.round(hs * 1.02));
+
+  ctx.fillStyle = INK; for(let x = 56; x < 430; x += 9) ctx.fillRect(x, 356, 5, 5);
+
+  const name = p.name || "Employee Name";
+  fitSize(ctx, name, 800, 88, 44, 1090); ctx.fillStyle = NC; ctx.fillText(name, 56, 488);
+  ctx.font = F(500, 31); ctx.fillStyle = INK; ctx.fillText(p.title || (p.dept === "sales" ? "Sales Consultant" : "Service Advisor"), 58, 544);
+
+  const rows = [];
+  if(p.phone) rows.push(["Desk Phone: ", lineWithExt(p.phone, p.ext)]);
+  const tl = p.text !== undefined ? p.text : s.textLine;
+  if(tl) rows.push(["Text Me: ", fmtPhone(tl)]);
+  if(p.email) rows.push(["Email Me: ", p.email]);
+  let rs = 56;
+  for(;;){
+    const widest = Math.max(...rows.map(([l, v]) => { ctx.font = F(400, rs); const a = ctx.measureText(l).width; ctx.font = F(700, rs); return a + ctx.measureText(v).width; }), 0);
+    if(widest <= 1090 || rs <= 30) break; rs -= 1;
+  }
+  const ys = [655, 755, 855];
+  rows.forEach(([l, v], i) => {
+    ctx.font = F(400, rs); ctx.fillStyle = INK; ctx.fillText(l, 56, ys[i]);
+    const lw = ctx.measureText(l).width; ctx.font = F(700, rs); ctx.fillText(v, 56 + lw, ys[i]);
+  });
+
+  drawQR(ctx, buildVCard(s, p), 112, 945, 312, "#000", "L");
+  ctx.font = F(500, 33); ctx.fillStyle = NC;
+  ctx.fillText("Scan Here To Download My Contact", 456, 1066);
+  ctx.fillText("Info Directly To Your Phone!", 456, 1126);
+
+  if(imgs.brand){ drawImgContain(ctx, imgs.brand, 870, 1196, 270, 138); drawImgContain(ctx, imgs.dealer, 860, 1356, 285, 112); }
+  else drawImgContain(ctx, imgs.dealer, 840, 1250, 305, 170);
+}
+
+/* ---------- business card ---------- */
+function webHost(u){ return String(u || "").replace(/^https?:\/\//i, "").replace(/^www\./i, "").replace(/\/+$/, ""); }
+function drawGlobe(ctx, x, cy, r, color){
+  ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = Math.max(2, r * 0.16);
+  ctx.beginPath(); ctx.arc(x + r, cy, r, 0, Math.PI * 2); ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(x + r, cy, r * 0.45, r, 0, 0, Math.PI * 2); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x, cy); ctx.lineTo(x + 2 * r, cy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x + r * 0.18, cy - r * 0.5); ctx.lineTo(x + r * 1.82, cy - r * 0.5); ctx.moveTo(x + r * 0.18, cy + r * 0.5); ctx.lineTo(x + r * 1.82, cy + r * 0.5); ctx.stroke();
+  ctx.restore();
+}
+function drawEnvelope(ctx, x, cy, size, color){
+  const w = size * 1.25, h = size * 0.9, y = cy - h / 2;
+  ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = Math.max(2, size * 0.13); ctx.lineJoin = "round";
+  rr(ctx, x, y, w, h, size * 0.12); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x + size * 0.08, y + size * 0.1); ctx.lineTo(x + w / 2, y + h * 0.58); ctx.lineTo(x + w - size * 0.08, y + size * 0.1); ctx.stroke();
+  ctx.restore();
+}
+function drawBizFront(ctx, s, p, imgs, qrOnFront, qrMode){
+  const NC = s.contactName || s.waveA || "#0772bc", A = s.waveA || NC, B = s.waveB || "#b9bcc4";
+  ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, BW, BH);
+  ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  ctx.beginPath(); ctx.moveTo(0, 585); ctx.quadraticCurveTo(380, 532, 760, 575); ctx.quadraticCurveTo(960, 598, BW, 546);
+  ctx.lineTo(BW, 560); ctx.quadraticCurveTo(960, 612, 760, 590); ctx.quadraticCurveTo(380, 548, 0, 598); ctx.closePath(); ctx.fillStyle = B; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(0, BH); ctx.lineTo(0, 598); ctx.quadraticCurveTo(380, 548, 760, 590); ctx.quadraticCurveTo(960, 612, BW, 560); ctx.lineTo(BW, BH); ctx.closePath(); ctx.fillStyle = A; ctx.fill();
+
+  const name = p.name || "Employee Name";
+  fitSize(ctx, name, 700, 60, 34, 620); ctx.fillStyle = NC; ctx.fillText(name, 85, 146);
+  ctx.font = F(500, 26); ctx.fillStyle = "#444"; ctx.fillText(p.title || (p.dept === "sales" ? "Sales Consultant" : "Service Advisor"), 87, 186);
+  ctx.fillStyle = NC; ctx.fillRect(87, 208, 70, 5);
+
+  const tl = p.text !== undefined ? p.text : s.textLine;
+  const dk = digits(p.phone), tx = digits(tl), rows = [];
+  const ex = String(p.ext || "").replace(/\D/g, "");
+  if(dk.length === 10 && dk === tx && !ex){
+    rows.push(["Text & Call", fmtPhone(dk)]);
+  } else {
+    if(dk.length === 10) rows.push(["Call Me", fmtPhone(dk), ex]);
+    if(tx.length === 10) rows.push(["Text Me", fmtPhone(tx)]);
+  }
+  if(p.email) rows.push(["@mail", p.email]);
+  if(s.website) rows.push(["@web", webHost(s.website)]);
+  const maxW = qrOnFront ? 560 : 640;
+  const isIcon = l => l === "@web" || l === "@mail";
+  const valueW = (r, f) => { ctx.font = F(400, f); let w = ctx.measureText(r[1]).width; if(r[2]){ ctx.font = F(700, f); w += ctx.measureText(" Ext. " + r[2]).width; } return w; };
+  const iconW = f => f * 1.25;
+  let fs = 31;
+  for(;;){
+    ctx.font = F(700, fs); const lw = Math.max(0, ...rows.map(r => isIcon(r[0]) ? iconW(fs) : ctx.measureText(r[0]).width));
+    const vw = Math.max(0, ...rows.map(r => valueW(r, fs)));
+    if(lw + 22 + vw <= maxW || fs <= 20) break; fs -= 1;
+  }
+  ctx.font = F(700, fs); const labelW = Math.max(0, ...rows.map(r => isIcon(r[0]) ? iconW(fs) : ctx.measureText(r[0]).width)) + 22;
+  const lh = Math.round(fs * 1.5);
+  let y = 270;
+  rows.forEach(([l, v, x]) => {
+    if(l === "@web") drawGlobe(ctx, 88, y - fs * 0.36, fs * 0.5, NC);
+    else if(l === "@mail") drawEnvelope(ctx, 88, y - fs * 0.36, fs * 0.8, NC);
+    else { ctx.font = F(700, fs); ctx.fillStyle = NC; ctx.fillText(l, 87, y); }
+    ctx.font = F(400, fs); ctx.fillStyle = "#222"; ctx.fillText(v, 87 + labelW, y);
+    if(x){ const vx = 87 + labelW + ctx.measureText(v).width; ctx.font = F(700, fs); ctx.fillText(" Ext. " + x, vx, y); }
+    y += lh;
+  });
+  const a = parseAddress(s.address);
+  if(a){ const line = `${a.street}, ${a.city}, ${a.state} ${a.zip}`; fitSize(ctx, line, 400, 25, 18, maxW); ctx.fillStyle = "#555"; ctx.fillText(line, 87, Math.min(y + 8, 525)); }
+
+  ctx.fillStyle = NC;
+  if(qrOnFront){
+    const s1 = "Experience the way car buying and servicing should be,", s2 = "Experience Lester Glenn";
+    const fz = Math.min(fitSize(ctx, s1, 500, 21, 15, maxW, true), 21); ctx.font = F(500, fz, true);
+    ctx.fillText(s1, 87, 503); ctx.fillText(s2, 87, 503 + Math.round(fz * 1.3));
+  } else {
+    const sl = "Experience the way car buying and servicing should be, Experience Lester Glenn";
+    fitSize(ctx, sl, 500, 23, 15, 950, true); ctx.fillText(sl, 87, 514);
+  }
+
+  if(qrOnFront){
+    const review = qrMode === "review", qs = 205, qx = 1040 - qs, qy = imgs.brand ? 318 : 290;
+    if(imgs.brand){ drawImgContain(ctx, imgs.brand, 800, 78, 240, 120, "right"); drawImgContain(ctx, imgs.dealer, 780, 210, 260, 88, "right"); }
+    else drawImgContain(ctx, imgs.dealer, 740, 82, 300, 160, "right");
+    drawQR(ctx, review ? s.reviewUrl : buildVCard(s, p), qx, qy, qs, "#000", review ? "M" : "L");
+    // callout to the left of the QR
+    const l1 = "Scan here to", l2 = review ? "leave a review" : "save my info";
+    const cy = qy + qs / 2, right = qx - 52;
+    ctx.textAlign = "right"; ctx.fillStyle = NC; ctx.font = F(700, 24);
+    ctx.fillText(l1, right, cy - 6); ctx.fillText(l2, right, cy + 24);
+    ctx.strokeStyle = NC; ctx.lineWidth = 4; ctx.lineCap = "round"; ctx.lineJoin = "round";
+    ctx.beginPath(); ctx.moveTo(right + 10, cy + 2); ctx.lineTo(qx - 14, cy + 2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(qx - 26, cy - 9); ctx.lineTo(qx - 14, cy + 2); ctx.lineTo(qx - 26, cy + 13); ctx.stroke();
+    ctx.textAlign = "left";
+  } else if(imgs.brand){ drawImgContain(ctx, imgs.brand, 800, 80, 240, 150, "right"); drawImgContain(ctx, imgs.dealer, 760, 300, 280, 110, "right"); }
+  else drawImgContain(ctx, imgs.dealer, 720, 90, 320, 160, "right");
+}
+function drawBizBack(ctx, s, p, imgs, qrMode){
+  const NC = s.contactName || s.waveA || "#0772bc", A = s.waveA || NC, B = s.waveB || "#b9bcc4";
+  ctx.fillStyle = A; ctx.fillRect(0, 0, BW, BH);
+  ctx.beginPath(); ctx.moveTo(640, 0); ctx.quadraticCurveTo(940, 26, BW, 150); ctx.lineTo(BW, 92); ctx.quadraticCurveTo(950, 4, 780, 0); ctx.closePath(); ctx.fillStyle = B; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(0, BH); ctx.lineTo(0, 618); ctx.quadraticCurveTo(200, 612, 400, BH); ctx.closePath(); ctx.fill();
+  rr(ctx, 100, 100, 925, 475, 26); ctx.fillStyle = "#fff"; ctx.fill();
+  const review = qrMode === "review";
+  drawQR(ctx, review ? s.reviewUrl : buildVCard(s, p), 145, 172, 330, "#000", review ? "M" : "L");
+  ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+  const cx = 755;
+  if(imgs.brand){ drawImgContain(ctx, imgs.dealer, 545, 140, 420, 120); }
+  else drawImgContain(ctx, imgs.dealer, 545, 150, 420, 150);
+  const cap = review ? "Scan to leave a review" : "Scan to save my contact info";
+  fitSize(ctx, cap, 700, 34, 22, 420); ctx.fillStyle = NC; ctx.fillText(cap, cx, imgs.brand ? 345 : 375);
+  if(imgs.brand) drawImgContain(ctx, imgs.brand, 625, 405, 260, 130);
+  ctx.textAlign = "left";
+}
+function drawTrimGuide(ctx, x0, y0){
+  ctx.save(); ctx.setLineDash([10, 8]); ctx.lineWidth = 2; ctx.strokeStyle = "rgba(0,0,0,.35)";
+  ctx.strokeRect(x0 + BLEED, y0 + BLEED, BW - 2 * BLEED, BH - 2 * BLEED); ctx.restore();
+}
+async function renderBizSide(canvas, scale, store, side, person, qrMode){
+  const [dealer, brand, fam] = await Promise.all([loadImg(store.dealerLogo), loadImg(store.brandLogo), loadStoreFont(store)]);
+  curFamily = fam;
+  canvas.width = BW * scale; canvas.height = BH * scale;
+  const ctx = canvas.getContext("2d"); ctx.setTransform(scale, 0, 0, scale, 0, 0); ctx.imageSmoothingQuality = "high";
+  if(side === "front") drawBizFront(ctx, store, person, { dealer, brand }, oneSided(), qrMode); else drawBizBack(ctx, store, person, { dealer, brand }, qrMode);
+}
+
+async function renderTo(canvas, scale, store, type, person){
+  const [dealer, brand, fam] = await Promise.all([loadImg(store.dealerLogo), loadImg(store.brandLogo), loadStoreFont(store)]);
+  curFamily = fam;
+  const isC = type === "contact";
+  if(type === "biz"){
+    const one = oneSided(), q = $("bizQr").value, p = person || { name:"", title:"" };
+    canvas.width = BW * scale; canvas.height = (one ? BH : BH * 2 + BGAP) * scale;
+    const ctx = canvas.getContext("2d"); ctx.setTransform(scale, 0, 0, scale, 0, 0); ctx.imageSmoothingQuality = "high";
+    ctx.fillStyle = "#e9ecef"; ctx.fillRect(0, 0, BW, BH * 2 + BGAP);
+    drawBizFront(ctx, store, p, { dealer, brand }, one, q); drawTrimGuide(ctx, 0, 0);
+    if(one) return;
+    ctx.save(); ctx.translate(0, BH + BGAP); drawBizBack(ctx, store, p, { dealer, brand }, q); ctx.restore(); drawTrimGuide(ctx, 0, BH + BGAP);
+    return;
+  }
+  const sx = typeof scale === "object" ? scale.sx : scale, sy = typeof scale === "object" ? scale.sy : scale;
+  canvas.width = Math.round((isC ? CW : W) * sx); canvas.height = Math.round((isC ? CH : H) * sy);
+  const ctx = canvas.getContext("2d"); ctx.setTransform(sx, 0, 0, sy, 0, 0);
+  ctx.imageSmoothingQuality = "high";
+  const p = person || { name:"", title:"" };
+  if(type === "desk") drawDesk(ctx, store, { dealer, brand });
+  else if(isC) drawContact(ctx, store, p, { dealer, brand });
+  else drawPersonal(ctx, store, p.name, p.title, type, { dealer, brand });
+}
+
+/* ---------- 300 dpi export ---------- */
+const DPI = 300;
+/* letter fliers: 8.5 x 11 in -> 2550 x 3300 px; contact cards: 8 x 10 in -> 2400 x 3000 px; business cards are drawn at 300 dpi already */
+function exportScale(type){ return type === "contact" ? { sx: 8 * DPI / CW, sy: 10 * DPI / CH } : { sx: 8.5 * DPI / W, sy: 11 * DPI / H }; }
+const CRC_TABLE = (() => { const t = new Uint32Array(256); for(let n = 0; n < 256; n++){ let c = n; for(let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(bytes){ let c = 0xFFFFFFFF; for(let i = 0; i < bytes.length; i++) c = CRC_TABLE[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+/* stamp a PNG with its print resolution (pHYs chunk) so it opens at the right physical size */
+async function pngAtDpi(blob, dpi){
+  const src = new Uint8Array(await blob.arrayBuffer());
+  const ppm = Math.round(dpi / 0.0254);
+  const chunk = new Uint8Array(21), dv = new DataView(chunk.buffer);
+  dv.setUint32(0, 9); chunk.set([0x70, 0x48, 0x59, 0x73], 4); dv.setUint32(8, ppm); dv.setUint32(12, ppm); chunk[16] = 1;
+  dv.setUint32(17, crc32(chunk.subarray(4, 17)));
+  const ihdrEnd = 8 + 25; /* signature + IHDR chunk */
+  const out = new Uint8Array(src.length + chunk.length);
+  out.set(src.subarray(0, ihdrEnd), 0); out.set(chunk, ihdrEnd); out.set(src.subarray(ihdrEnd), ihdrEnd + chunk.length);
+  return new Blob([out], { type:"image/png" });
+}
+const canvasPng = async cv => pngAtDpi(await new Promise(r => cv.toBlob(r, "image/png")), DPI);
+
+/* ---------- make view ---------- */
+const previewCanvas = document.createElement("canvas");
+$("paper").appendChild(previewCanvas);
+
+function currentStore(){ return stores.find(s => s.id === state.storeId) || null; }
+/* ---------- contact card editor ---------- */
+let contacts = [];
+let emailTouched = new WeakSet();
+function effectiveEmail(c){ return emailTouched.has(c) && c.email.trim() ? c.email.trim() : autoEmail(c.name); }
+state.dept = "service";
+const isReviewType = () => state.type === "service" || state.type === "sales";
+const dept = () => state.dept;
+const deptTitle = () => dept() === "sales" ? "Sales Consultant" : "Service Advisor";
+const isDefaultTitle = t => t === "Service Advisor" || t === "Sales Consultant";
+function blankContact(){ return { name:"", title:deptTitle(), phone:"", ext:"", email:"" }; }
+function lineWithExt(line, ext){ const l = fmtPhone(line); const e = String(ext || "").replace(/\D/g, ""); return e ? `${l} Ext. ${e}` : l; }
+function storeLine(){ const s = currentStore(); return s ? (dept() === "sales" ? s.salesLine : s.textLine) || "" : ""; }
+function contactPeople(){
+  
+  return contacts.map(c => ({
+    name:c.name.trim().replace(/\s+/g, " "), title:c.title.trim() || deptTitle(), dept:dept(), ext:(c.ext || "").replace(/\D/g, ""),
+    phone:c.phone.trim(), email:effectiveEmail(c), text:(c.line || "").trim()
+  }));
+}
+function tidyName(v){
+  let t = String(v || "").replace(/\s+/g, " ").trim();
+  if(t && (t === t.toLowerCase() || t === t.toUpperCase())) t = t.toLowerCase().replace(/(^|[\s\-'])([a-z])/g, (m, a, b) => a + b.toUpperCase());
+  return t;
+}
+function phoneOk(v){ return !v.trim() || digits(v).length === 10; }
+function emailOk(v){ return !v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+function renderCards(){
+  const list = $("cardList"); list.innerHTML = "";
+  contacts.forEach((c, i) => {
+    if(!c._lineTouched) c.line = storeLine();
+    applyDeskDefault(c, null, i);
+    const card = document.createElement("div"); card.className = "card"; card.dataset.idx = i;
+    const head = document.createElement("div"); head.className = "card-head";
+    const h = document.createElement("span"); h.textContent = c.name.trim() || `Card ${i + 1}`;
+    const rm = document.createElement("button"); rm.type = "button"; rm.textContent = "Remove";
+    rm.setAttribute("aria-label", "Remove this card");
+    rm.addEventListener("click", () => { contacts.splice(i, 1); if(!contacts.length) contacts.push(blankContact()); state.page = Math.min(state.page, contacts.length - 1); renderCards(); scheduleRender(); });
+    head.append(h, rm); card.appendChild(head);
+    const grid = document.createElement("div"); grid.className = "grid2";
+    const mk = (key, label, opts) => {
+      const f = document.createElement("div"); f.className = "field" + (opts.full ? " full" : "");
+      const id = `c${i}_${key}`;
+      const l = document.createElement("label"); l.htmlFor = id; l.textContent = label;
+      const inp = document.createElement("input"); inp.type = opts.type || "text"; inp.id = id; inp.value = c[key] || "";
+      if(opts.placeholder) inp.placeholder = opts.placeholder;
+      if(opts.list) inp.setAttribute("list", opts.list);
+      if(opts.inputmode) inp.inputMode = opts.inputmode;
+      const err = document.createElement("small"); err.className = "err";
+      const check = () => {
+        const bad = opts.valid && !opts.valid(inp.value);
+        inp.classList.toggle("invalid", !!bad); err.textContent = bad ? opts.msg : "";
+      };
+      inp.addEventListener("focus", () => { if(state.page !== i){ state.page = i; markActive(); scheduleRender(); } });
+      inp.addEventListener("input", () => {
+        c[key] = inp.value;
+        if(key === "phone"){ c._autoPhone = false; c._deskAuto = false; }
+        if(key === "line") c._lineTouched = true;
+        if(key === "title") c._autoTitle = false;
+        if(key === "email"){
+          if(!inp.value.trim() || inp.value.trim().toLowerCase() === autoEmail(c.name).toLowerCase()) emailTouched.delete(c); else emailTouched.add(c);
+          setEmailState(grid, i, c);
+        }
+        if(key === "name"){
+          h.textContent = inp.value.trim() || `Card ${i + 1}`;
+          if(!emailTouched.has(c)){ c.email = autoEmail(inp.value); const e = grid.querySelector(`#c${i}_email`); if(e) e.value = c.email; }
+          setEmailState(grid, i, c);
+          applyRoster(c, grid, i);
+        }
+        if(opts.valid) check();
+        state.page = i; updateSaves(); setStatus($("makeStatus"), ""); scheduleRender();
+      });
+      inp.addEventListener("blur", () => {
+        if((key === "phone" || key === "line") && digits(inp.value).length === 10){ inp.value = c[key] = fmtPhone(inp.value); scheduleRender(); }
+        if(key === "name" || key === "title"){
+          const t = tidyName(inp.value);
+          if(t !== inp.value){ inp.value = c[key] = t; if(key === "name"){ h.textContent = t || `Card ${i + 1}`; if(!emailTouched.has(c)){ const e = grid.querySelector(`#c${i}_email`); if(e) e.value = c.email = autoEmail(t); setEmailState(grid, i, c); } } scheduleRender(); }
+        }
+        check();
+      });
+      f.append(l, inp, err); check();
+      return f;
+    };
+    grid.append(
+      mk("name", "Full name", { placeholder:"First and last name", full:true, valid:v => !v.trim() || v.trim().split(/\s+/).length >= 2, msg:"Add their last name too." }),
+      mk("title", "Title", { list:"titleOptions", full:true }),
+      ...([mk("phone", "Desk phone", { inputmode:"tel", placeholder:"Leave blank if none", valid:phoneOk, msg:"Use a 10-digit phone number." }),
+      ...(dept() === "sales" ? [mk("ext", "Ext. on desk phone", { inputmode:"numeric", placeholder:"Optional", valid:v => /^\d{0,6}$/.test(v.trim()), msg:"Numbers only, up to 6 digits." })] : []),
+      ...([mk("line", dept() === "sales" ? "Phone Number To Text Message" : "Phone Number For Texting", { inputmode:"tel", placeholder:"Leave blank if none", valid:phoneOk, msg:"Use a 10-digit phone number.", full: dept() === "sales" })]),
+      mk("email", "Email", { type:"email", full:true, placeholder:"Fills in from the name", valid:emailOk, msg:"That email doesn't look right." })])
+    );
+    const ef = grid.querySelector(`#c${i}_email`);
+    if(ef){
+      if(!emailTouched.has(c)) ef.value = c.email = autoEmail(c.name);
+      const note = document.createElement("div"); note.className = "email-auto"; note.id = `c${i}_emailnote`;
+      ef.closest(".field").appendChild(note);
+      ef.addEventListener("blur", () => { if(!ef.value.trim()){ emailTouched.delete(c); ef.value = c.email = autoEmail(c.name); setEmailState(grid, i, c); scheduleRender(); } });
+      setEmailState(grid, i, c);
+    }
+    card.appendChild(grid); list.appendChild(card);
+  });
+  markActive(); updateSaves();
+}
+function salesDeskDefault(){ const s = currentStore(); return dept() === "sales" && s ? s.salesDesk || "" : ""; }
+function applyDeskDefault(c, grid, i){
+  const want = salesDeskDefault();
+  if(c._deskAuto && !want){ c.phone = ""; c._deskAuto = false; }
+  if(want && (!c.phone.trim() || c._deskAuto)){ c.phone = want; c._deskAuto = true; c._autoPhone = false; }
+  const ph = grid && grid.querySelector(`#c${i}_phone`); if(ph && ph.value !== c.phone){ ph.value = c.phone; ph.classList.remove("invalid"); }
+}
+function applyRoster(c, grid, i){
+  const known = rosterFor(c.name.trim());
+  if(!c.phone.trim() || c._autoPhone || c._deskAuto){
+    const kp = known && known.phone || "";
+    if(kp || !c._deskAuto){ c.phone = kp; c._autoPhone = !!kp; c._deskAuto = false; }
+    const ph = grid && grid.querySelector(`#c${i}_phone`); if(ph){ ph.value = c.phone; ph.classList.remove("invalid"); }
+  }
+  applyDeskDefault(c, grid, i);
+  if(known && known.ext && !c.ext){ c.ext = known.ext; const xf = grid && grid.querySelector(`#c${i}_ext`); if(xf) xf.value = c.ext; }
+  if(c._autoTitle || isDefaultTitle(c.title)){
+    const t = known && known.title || deptTitle();
+    if(t !== c.title || c._autoTitle){ c.title = t; c._autoTitle = !isDefaultTitle(t); const tf = grid && grid.querySelector(`#c${i}_title`); if(tf) tf.value = c.title; }
+  }
+  if(known && known.email && !emailTouched.has(c) && known.email.toLowerCase() !== autoEmail(c.name).toLowerCase()){
+    emailTouched.add(c); c.email = known.email; const ef = grid && grid.querySelector(`#c${i}_email`); if(ef) ef.value = c.email;
+  }
+}
+function setEmailState(grid, i, c){
+  const note = grid.querySelector(`#c${i}_emailnote`); if(!note) return;
+  note.innerHTML = "";
+  if(emailTouched.has(c)){
+    const t = document.createElement("span"); t.textContent = "Custom email.";
+    const b = document.createElement("button"); b.type = "button"; b.textContent = "Use " + (autoEmail(c.name) || "the automatic email");
+    b.addEventListener("click", () => { emailTouched.delete(c); const e = grid.querySelector(`#c${i}_email`); e.value = c.email = autoEmail(c.name); e.classList.remove("invalid"); e.closest(".field").querySelector(".err").textContent = ""; setEmailState(grid, i, c); updateSaves(); scheduleRender(); });
+    note.append(t, b);
+  } else if(c.name.trim()){
+    note.textContent = "Built from the name. Type over it to use a different address.";
+  }
+}
+function markActive(){ document.querySelectorAll("#cardList .card").forEach(el => el.dataset.active = String(Number(el.dataset.idx) === state.page)); updateSaves(); }
+function updateSaves(){
+  const el = $("savesLine"); if(!el) return;
+  if(!isCardMode()){ el.textContent = ""; return; }
+  const c = contacts[state.page]; const s = currentStore();
+  if(!c || !c.name.trim()){ el.textContent = "Type a name to build the QR code."; return; }
+  const have = ["name", "title"], missing = [];
+  (phoneOk(c.phone) && c.phone.trim() ? have : missing).push(c.ext && c.ext.trim() && c.phone.trim() ? "desk phone with extension" : "desk phone");
+  ((c.line || "").trim() ? have : missing).push(dept() === "sales" ? "phone number to text message" : "phone number for texting");
+  have.push("email");
+  (s && s.website ? have : missing).push("website");
+  (s && parseAddress(s.address) ? have : missing).push("store address");
+  el.textContent = "The QR saves " + have.join(", ") + " to the customer's phone." + (missing.length ? " Not included: " + missing.join(", ") + "." : "");
+}
+function addContactFrom(p){
+  if(contacts.some(c => c.name.trim().toLowerCase() === p.name.toLowerCase())) return;
+  const c = { name:p.name, title:p.title || deptTitle(), phone:p.phone || "", ext:p.ext || "", email:p.email || "", _autoPhone:!!p.phone, _autoTitle:!!p.title };
+  if(p.email && p.email.toLowerCase() !== autoEmail(p.name).toLowerCase()) emailTouched.add(c);
+  const blank = contacts.findIndex(x => !x.name.trim());
+  if(blank >= 0) contacts[blank] = c; else contacts.push(c);
+}
+$("addCardBtn").addEventListener("click", () => {
+  contacts.push(blankContact()); state.page = contacts.length - 1; renderCards(); scheduleRender();
+  const n = document.getElementById(`c${state.page}_name`); if(n) n.focus();
+});
+$("bizQr").addEventListener("change", () => { updateSaves(); scheduleRender(); });
+$("bizSides").addEventListener("change", () => scheduleRender());
+document.addEventListener("input", e => { if(e.target.closest && e.target.closest("#cardList")) updateReady(); });
+const oneSided = () => $("bizSides").value === "one";
+function syncTextLine(){ updateSaves(); }
+function setDept(d){
+  const s = currentStore();
+  if(s && s.serviceOnly) d = "service";
+  const changed = d !== state.dept;
+  state.dept = d;
+  $("deptSeg").querySelectorAll("button").forEach(x => { x.setAttribute("aria-pressed", String(x.dataset.dept === d)); if(x.dataset.dept === "sales") x.hidden = !!(s && s.serviceOnly); });
+  $("deptNote").hidden = !(s && s.serviceOnly);
+  if(state.type === "service" || state.type === "sales") state.type = d;
+  if(state.type === "desk" && d !== "sales") state.type = d;
+  $("deskBtn").hidden = d !== "sales";
+  if(changed) contacts.forEach(c => { c._lineTouched = false; if(isDefaultTitle(c.title)) c.title = deptTitle(); });
+  syncTypeButtons(); applyType();
+}
+function syncTypeButtons(){
+  const key = state.type === "service" || state.type === "sales" ? "review" : state.type;
+  $("typeSeg").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.type === key)));
+}
+$("deptSeg").addEventListener("click", e => {
+  const b = e.target.closest("button[data-dept]"); if(!b) return;
+  setDept(b.dataset.dept);
+});
+
+function people_(){
+  if(state.type === "desk") return [];
+  return contactPeople();
+}
+function names(){ return people_().map(p => p.name); }
+function rosterFor(){ return null; }
+
+let renderTimer = null;
+function scheduleRender(){ clearTimeout(renderTimer); renderTimer = setTimeout(renderPreview, 120); }
+async function renderPreview(){
+  const s = currentStore();
+  if(!s){ const c = previewCanvas.getContext("2d"); previewCanvas.width = W/2; previewCanvas.height = H/2; c.fillStyle = "#fff"; c.fillRect(0,0,W,H); c.fillStyle = "#777"; c.font = F(500, 30); c.textAlign = "center"; c.fillText(stores.length ? "Choose your store in step 1" : "Loading stores...", W/4, H/4); updateReady(); return; }
+  const list = people_();
+  const isDesk = state.type === "desk";
+  $("paper").style.aspectRatio = state.type === "contact" ? "1200/1500" : state.type === "biz" ? (oneSided() ? `${BW}/${BH}` : `${BW}/${BH * 2 + BGAP}`) : "1545/2000";
+  if(state.page >= list.length) state.page = Math.max(0, list.length - 1);
+  $("pager").hidden = isDesk || list.length < 2;
+  const cur = list[state.page];
+  $("pageLbl").textContent = `${cur && cur.name ? cur.name : "Card " + (state.page + 1)} (${state.page + 1} of ${list.length})`;
+  if(!isDesk) markActive();
+  await renderTo(previewCanvas, 0.6, s, state.type, cur && cur.name ? cur : { name:"", title:deptTitle(), dept:dept(), text:(contacts[state.page] && contacts[state.page].line || storeLine()).trim() });
+  updateReady();
+}
+
+const LAST_STORE = "lg-flier-last-store";
+function fillStoreSelect(){
+  const sel = $("storeSel"); sel.innerHTML = "";
+  const ph = document.createElement("option"); ph.value = ""; ph.textContent = "Choose your store..."; ph.disabled = true; sel.appendChild(ph);
+  stores.slice().sort((a, b) => (a.name || "").localeCompare(b.name || "")).forEach(s => {
+    const o = document.createElement("option"); o.value = s.id; o.textContent = s.name || s.googleName || "Unnamed store"; sel.appendChild(o);
+  });
+  if(!currentStore()){ let last = null; try{ last = localStorage.getItem(LAST_STORE); }catch(e){} state.storeId = stores.some(x => x.id === last) ? last : null; }
+  sel.value = state.storeId || "";
+}
+
+$("storeSel").addEventListener("change", e => {
+  state.storeId = e.target.value; try{ localStorage.setItem(LAST_STORE, state.storeId); }catch(err){}
+  const st0 = currentStore(); if(st0 && st0.serviceOnly && state.dept !== "service"){ contacts.forEach(c => { c._lineTouched = false; }); setDept("service"); }
+  else setDept(state.dept);
+  syncTextLine(); renderRecent();
+  if(state.type !== "desk"){ contacts.forEach(c => { c._lineTouched = false; if(c.name.trim()) applyRoster(c, null, 0); }); renderCards(); }
+  scheduleRender();
+});
+function applyType(){
+  $("bizFields").hidden = state.type !== "biz";
+  $("dlNum").textContent = "5";
+  if(!contacts.length) contacts.push(blankContact());
+  contacts.forEach(c => { if(c.name.trim()) applyRoster(c, null, 0); });
+  contacts.forEach(c => { if(isDefaultTitle(c.title)) c.title = deptTitle(); });
+  state.page = Math.min(state.page, contacts.length - 1);
+  renderCards(); renderRecent(); setStatus($("makeStatus"), ""); scheduleRender();
+}
+$("typeSeg").addEventListener("click", e => {
+  const b = e.target.closest("button[data-type]"); if(!b) return;
+  state.type = b.dataset.type === "review" ? state.dept : b.dataset.type;
+  syncTypeButtons(); applyType();
+});
+$("prevBtn").addEventListener("click", () => { const n = names().length; state.page = (state.page - 1 + n) % n; renderPreview(); });
+$("nextBtn").addEventListener("click", () => { const n = names().length; state.page = (state.page + 1) % n; renderPreview(); });
+
+function slug(s){ return s.replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, " "); }
+
+async function offer(filename, blob){
+  if(downloads){
+    try{ await downloads.save({ filename, data: blob }); return "saved"; }
+    catch(e){ if(e && e.code === "declined") return "declined"; if(e && e.code === "rate_limited") return "busy"; downloads = null; }
+  }
+  // fallback: open the file so it can be saved from the browser
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a"); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 30000);
+  return "fallback";
+}
+
+const TYPE_NAMES = { service:"service review flier", sales:"sales review flier", desk:"sales desk sign", contact:"contact card", biz:"business card" };
+function problems(){
+  const out = [], s = currentStore();
+  if(!s) return ["Choose your store in step 1."];
+  const needsReview = !isCardMode() || (state.type === "biz" && $("bizQr").value === "review");
+  if(needsReview && !s.reviewUrl) out.push(`${s.name} has no Google review link yet. A manager can add it in Store settings.`);
+  if(state.type === "desk") return out;
+  const filled = contacts.filter(c => c.name.trim());
+  if(!filled.length) out.push("Type at least one person's full name in step 3.");
+  const seen = new Set();
+  contacts.forEach((c, i) => {
+    const n = c.name.trim(); if(!n) return;
+    const who = tidyName(n);
+    if(n.split(/\s+/).length < 2) out.push(`${who}: add their last name.`);
+    if(seen.has(n.toLowerCase())) out.push(`${who} is listed twice.`); seen.add(n.toLowerCase());
+    if(!c.title.trim()) out.push(`${who}: add a title.`);
+    {
+      if(!phoneOk(c.phone)) out.push(`${who}: the desk phone needs 10 digits.`);
+      if(!emailOk(c.email)) out.push(`${who}: the email doesn't look right.`);
+      if(c.ext && !/^\d{0,6}$/.test(c.ext.trim())) out.push(`${who}: the extension should be numbers only.`);
+      if(!phoneOk(c.line || "")) out.push(`${who}: ${dept() === "sales" ? "the phone number to text message" : "the phone number for texting"} needs 10 digits.`);
+    }
+  });
+  return out;
+}
+function updateReady(){
+  const box = $("readyBox"); if(!box) return;
+  const probs = problems();
+  const ok = !probs.length;
+  $("pdfBtn").disabled = !ok; $("pngBtn").disabled = !ok;
+  box.className = "ready " + (ok ? "ok" : "bad"); box.innerHTML = "";
+  if(ok){
+    const s = currentStore(), list = state.type === "desk" ? [] : people_().filter(p => p.name);
+    const what = TYPE_NAMES[state.type] + (state.type === "biz" ? (oneSided() ? " (one sided)" : " (front and back)") : "");
+    const n = state.type === "desk" ? 1 : list.length;
+    const lead = document.createElement("div");
+    lead.textContent = state.type === "desk"
+      ? `Ready: 1 ${what} for ${s.name}.`
+      : `Ready: ${n} ${what}${n === 1 ? "" : "s"} for ${s.name}${isCardMode() ? `, ${dept()} department` : ""}.`;
+    box.appendChild(lead);
+    if(list.length){ const who = document.createElement("div"); who.className = "muted"; who.textContent = list.map(p => p.name).join(", "); box.appendChild(who); }
+  } else {
+    const lead = document.createElement("div"); lead.textContent = "Before you can download:"; box.appendChild(lead);
+    const ul = document.createElement("ul"); probs.forEach(t => { const li = document.createElement("li"); li.textContent = t; ul.appendChild(li); }); box.appendChild(ul);
+  }
+}
+function jobList(){
+  const s = currentStore(); if(!s) return null;
+  if(state.type === "desk") return [{ name:"", file: `${slug(s.name || "Store")} - Sales Desk Review Flier` }];
+  const kind = state.type === "contact" ? "Contact Card" : state.type === "biz" ? "Business Card" : "Review Flier";
+  return people_().filter(p => p.name).map(p => ({ ...p, file: `${slug(p.name)} - ${slug(p.title)} ${kind}` }));
+}
+
+async function doExport(kind){
+  const st = $("makeStatus");
+  const s = currentStore();
+  const probs = problems();
+  if(probs.length){ updateReady(); setStatus(st, "Fix the items above, then download.", "err"); return; }
+  const jobs = jobList();
+  const btns = [$("pdfBtn"), $("pngBtn")]; btns.forEach(b => b.disabled = true);
+  try{
+    const c = document.createElement("canvas");
+    const isC = state.type === "contact", pw = isC ? 576 : 612, ph = isC ? 720 : 792;
+    let result;
+    if(state.type === "biz"){
+      const q = $("bizQr").value, one = oneSided();
+      const f = document.createElement("canvas"), bk = document.createElement("canvas");
+      if(kind === "png"){
+        const j = jobs[Math.min(state.page, jobs.length - 1)];
+        setStatus(st, "Rendering...");
+        await renderBizSide(f, 1, s, "front", j, q);
+        if(!one){
+          await renderBizSide(bk, 1, s, "back", j, q);
+          c.width = BW; c.height = BH * 2 + BGAP; const cx2 = c.getContext("2d");
+          cx2.fillStyle = "#fff"; cx2.fillRect(0, 0, c.width, c.height); cx2.drawImage(f, 0, 0); cx2.drawImage(bk, 0, BH + BGAP);
+        }
+        result = await offer(j.file + ".png", await canvasPng(one ? f : c));
+      } else {
+        if(!window.jspdf){ setStatus(st, "The PDF library did not load. Use Download PNG instead.", "err"); return; }
+        const pdf = new window.jspdf.jsPDF({ unit:"pt", format:[270, 162], orientation:"landscape", compress:true });
+        let first = true;
+        const add = cv => { if(!first) pdf.addPage([270, 162], "landscape"); first = false; pdf.addImage(cv.toDataURL("image/jpeg", 0.95), "JPEG", 0, 0, 270, 162, undefined, "FAST"); };
+        for(let k = 0; k < jobs.length; k++){
+          setStatus(st, `Rendering card ${k + 1} of ${jobs.length}...`);
+          await renderBizSide(f, 1, s, "front", jobs[k], q); add(f);
+          if(!one){ await renderBizSide(bk, 1, s, "back", jobs[k], q); add(bk); }
+        }
+        const fname = jobs.length === 1 ? jobs[0].file + ".pdf" : `${slug(s.name || "Store")} - ${jobs.length} Business Cards.pdf`;
+        result = await offer(fname, pdf.output("blob"));
+      }
+      if(result === "declined"){ setStatus(st, "Download cancelled."); return; }
+      if(result === "busy"){ setStatus(st, "A download prompt is already open. Finish that one first.", "err"); return; }
+      setStatus(st, kind === "png" ? (one ? "Done. 300 dpi." : "Done at 300 dpi. The PNG shows the front above the back.")
+        : one ? "Done at 300 dpi. One page per card, 3.75 x 2.25 in with bleed, trimming to 3.5 x 2 in."
+        : "Done at 300 dpi. Each card is a front page then a back page, 3.75 x 2.25 in with bleed, trimming to 3.5 x 2 in.", "ok");
+      await remember(jobs);
+      return;
+    }
+    if(kind === "png"){
+      const j = jobs[state.type === "desk" ? 0 : Math.min(state.page, jobs.length - 1)];
+      setStatus(st, "Rendering...");
+      await renderTo(c, exportScale(state.type), s, state.type, j);
+      const blob = await canvasPng(c);
+      result = await offer(j.file + ".png", blob);
+    } else {
+      if(!window.jspdf){ setStatus(st, "The PDF library did not load. Use Download PNG instead.", "err"); return; }
+      const pdf = new window.jspdf.jsPDF({ unit:"pt", format:[pw, ph], compress:true });
+      for(let k = 0; k < jobs.length; k++){
+        setStatus(st, `Rendering page ${k + 1} of ${jobs.length}...`);
+        await renderTo(c, exportScale(state.type), s, state.type, jobs[k]);
+        if(k) pdf.addPage([pw, ph]);
+        pdf.addImage(c.toDataURL("image/jpeg", 0.95), "JPEG", 0, 0, pw, ph, undefined, "FAST");
+      }
+      const fname = jobs.length === 1 ? jobs[0].file + ".pdf" : `${slug(s.name || "Store")} - ${jobs.length} ${isC ? "Contact Cards" : "Review Fliers"}.pdf`;
+      result = await offer(fname, pdf.output("blob"));
+    }
+    if(result === "declined"){ setStatus(st, "Download cancelled."); return; }
+    if(result === "busy"){ setStatus(st, "A download prompt is already open. Finish that one first.", "err"); return; }
+    setStatus(st, isC ? "Done at 300 dpi. Print at 8 x 10 in, 100% scale." : "Done at 300 dpi. Print on letter paper at 100% scale.", "ok");
+    if(state.type !== "desk") await remember(jobs);
+  } catch(e){
+    setStatus(st, "Something went wrong while building the file: " + (e && e.message ? e.message : e), "err");
+  } finally { btns.forEach(b => b.disabled = false); }
+}
+$("pdfBtn").addEventListener("click", () => doExport("pdf"));
+$("pngBtn").addEventListener("click", () => doExport("png"));
+
+/* recent people */
+function renderRecent(){}
+async function remember(){}
+function roleOf(p){ return p.role || (p.type === "sales" ? "sales" : "service"); }
+function personKey(storeId, name){ return (storeId + "--" + name.toLowerCase()).replace(/[^A-Za-z0-9_\-.~:@+]/g, "_").slice(0, 190); }
+
+/* ---------- stores view ---------- */
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", String(x === b)));
+  $("view-make").hidden = b.dataset.tab !== "make";
+  $("view-stores").hidden = b.dataset.tab !== "stores";
+  if(b.dataset.tab === "stores"){ if(!editing) startEdit(currentStore() || null); renderStoreList(); }
+  else scheduleRender();
+}));
+
+function renderStoreList(){
+  const ul = $("storeList"); ul.innerHTML = "";
+  stores.slice().sort((a, b) => (a.name || "").localeCompare(b.name || "")).forEach(s => {
+    const li = document.createElement("li"); const b = document.createElement("button"); b.type = "button";
+    b.setAttribute("aria-current", String(editing && editing.id === s.id));
+    b.innerHTML = ""; const t = document.createElement("span"); t.textContent = s.name || "Unnamed store";
+    const m = document.createElement("span"); m.className = "meta"; m.textContent = s.reviewUrl ? "Review link set" : "Needs a review link";
+    b.append(t, m); b.addEventListener("click", () => { startEdit(s); renderStoreList(); });
+    li.appendChild(b); ul.appendChild(li);
+  });
+  if(!stores.length){ const li = document.createElement("li"); li.className = "empty"; li.textContent = "No stores yet."; ul.appendChild(li); }
+}
+function startEdit(s){
+  editing = s ? JSON.parse(JSON.stringify(s)) : { ...DEFAULT_STORE, id:null };
+  $("formTitle").textContent = editing.id ? "Edit " + (editing.name || "store") : "New store";
+  $("fName").value = editing.name || ""; $("fGoogle").value = editing.googleName || ""; $("fCategory").value = editing.category || "";
+  $("fAddress").value = editing.address || ""; $("fUrl").value = editing.reviewUrl || ""; $("fSlogan").value = editing.slogan || "";
+  $("fText").value = editing.textLine || ""; $("fSales").value = editing.salesLine || ""; $("fSalesDesk").value = editing.salesDesk || ""; $("fServiceOnly").checked = !!editing.serviceOnly; $("fWeb").value = editing.website || ""; $("fOrg").value = editing.orgName || "";
+  $("cName").value = editing.contactName || DEFAULT_STORE.contactName; $("cWaveA").value = editing.waveA || DEFAULT_STORE.waveA;
+  $("fNoStars").checked = !!editing.hideStars; $("fNoPencil").checked = !!editing.hidePencil;
+  $("upFont").value = ""; showFontStatus();
+  $("cWaveB").value = editing.waveB || DEFAULT_STORE.waveB; $("cWaveC").value = editing.waveC || DEFAULT_STORE.waveC;
+  $("cAccent").value = editing.accent || DEFAULT_STORE.accent; $("cDesk").value = editing.deskPrimary || DEFAULT_STORE.deskPrimary; $("cDesk2").value = editing.deskSecondary || DEFAULT_STORE.deskSecondary;
+  $("upDealer").value = ""; $("upBrand").value = "";
+  showThumb("tDealer", editing.dealerLogo); showThumb("tBrand", editing.brandLogo);
+  $("delStoreBtn").hidden = !editing.id; updateTestLink(); setStatus($("storeStatus"), "");
+}
+function showFontStatus(){
+  const f = editing && editing.fonts || [];
+  $("fontStatus").textContent = f.length ? `Using ${editing.fontName || "a custom font"} (${f.length} style${f.length === 1 ? "" : "s"}).` : "Using the standard font.";
+  $("fontClear").hidden = !f.length;
+  const canUpload = !!assets; $("upFont").hidden = !canUpload;
+  if(!canUpload) $("fontHint").textContent = f.length ? "" : "Font uploads are available to people who can edit this tool.";
+}
+$("fontClear").addEventListener("click", () => { editing.fonts = []; editing.fontName = ""; showFontStatus(); setStatus($("storeStatus"), "Font removed. Save the store to apply it."); });
+$("upFont").addEventListener("change", async e => {
+  const files = [...e.target.files]; if(!files.length || !assets) return;
+  const st = $("storeStatus"); const out = [];
+  for(const [k, file] of files.entries()){
+    setStatus(st, `Uploading font ${k + 1} of ${files.length}...`);
+    try{
+      const r = await assets.upload(file);
+      out.push({ url:r.url, ...fontFromFile(file.name) });
+    } catch(err){ setStatus(st, `Couldn't upload ${file.name}: ${err && (err.message || err.code) || err}`, "err"); return; }
+  }
+  editing.fonts = out;
+  editing.fontName = files[0].name.replace(/\.(otf|ttf|woff2?)$/i, "").replace(/[-_ ]?(regular|bold|medium|italic|light|black|semibold|extrabold|thin|book|heavy|oblique)+$/ig, "").replace(/([a-z])([A-Z])/g, "$1 $2").trim();
+  showFontStatus();
+  setStatus(st, `${out.length} font file${out.length === 1 ? "" : "s"} uploaded. Save the store to apply.`, "ok");
+});
+function showThumb(id, src){ const t = $(id); t.innerHTML = ""; if(src){ const i = new Image(); i.src = src; i.alt = ""; t.appendChild(i); } else { const s = document.createElement("span"); s.className = "empty"; s.textContent = "None"; t.appendChild(s); } }
+function updateTestLink(){ const u = $("fUrl").value.trim(); $("testLink").href = /^https?:\/\//.test(u) ? u : "#"; }
+$("fUrl").addEventListener("input", updateTestLink);
+
+async function readLogo(file){
+  const src = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(file); });
+  const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error("That file could not be read as an image.")); i.src = src; });
+  const max = 700, r = Math.min(1, max / Math.max(img.width || max, img.height || max));
+  const c = document.createElement("canvas"); c.width = Math.round((img.width || max) * r); c.height = Math.round((img.height || max) * r);
+  c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+  let out = c.toDataURL("image/webp", 0.9); if(!out.startsWith("data:image/webp")) out = c.toDataURL("image/png");
+  return out;
+}
+$("upDealer").addEventListener("change", async e => { const f = e.target.files[0]; if(!f) return; try{ editing.dealerLogo = await readLogo(f); showThumb("tDealer", editing.dealerLogo); }catch(err){ setStatus($("storeStatus"), err.message, "err"); } });
+$("upBrand").addEventListener("change", async e => { const f = e.target.files[0]; if(!f) return; try{ editing.brandLogo = await readLogo(f); showThumb("tBrand", editing.brandLogo); }catch(err){ setStatus($("storeStatus"), err.message, "err"); } });
+
+$("newStoreBtn").addEventListener("click", () => { startEdit(null); renderStoreList(); });
+$("saveStoreBtn").addEventListener("click", async () => {
+  const st = $("storeStatus");
+  const body = {
+    name:$("fName").value.trim(), googleName:$("fGoogle").value.trim(), category:$("fCategory").value.trim(),
+    address:$("fAddress").value.trim(), reviewUrl:$("fUrl").value.trim(), slogan:$("fSlogan").value.trim(),
+    accent:$("cAccent").value, deskPrimary:$("cDesk").value, deskSecondary:$("cDesk2").value,
+    dealerLogo:editing.dealerLogo || "", brandLogo:editing.brandLogo || "",
+    textLine:$("fText").value.trim() ? fmtPhone($("fText").value) : "", salesLine:$("fSales").value.trim() ? fmtPhone($("fSales").value) : "", salesDesk:$("fSalesDesk").value.trim() ? fmtPhone($("fSalesDesk").value) : "", serviceOnly:$("fServiceOnly").checked, website:$("fWeb").value.trim(), orgName:$("fOrg").value.trim(),
+    contactName:$("cName").value, waveA:$("cWaveA").value, waveB:$("cWaveB").value, waveC:$("cWaveC").value, hideStars:$("fNoStars").checked, hidePencil:$("fNoPencil").checked, fonts:editing.fonts || [], fontName:editing.fontName || "",
+    updated:Date.now()
+  };
+  if(body.address && !parseAddress(body.address)){ setStatus(st, "Write the address as street, city, state zip, for example 398 NJ-37, Toms River, NJ 08753.", "err"); return; }
+  if(!body.name){ setStatus(st, "Give the store a short name.", "err"); return; }
+  if(!body.googleName){ setStatus(st, "Add the store name exactly as it shows on Google.", "err"); return; }
+  if(body.reviewUrl && !/^https:\/\/\S+$/.test(body.reviewUrl)){ setStatus(st, "The review link should start with https://", "err"); return; }
+  const id = editing.id || ("store-" + Date.now().toString(36));
+  try{
+    if(db) await db.collection("stores").doc(id).set(body);
+    else { const i = stores.findIndex(s => s.id === id); const rec = { id, ...body }; if(i >= 0) stores[i] = rec; else stores.push(rec); lsSave(); onStores(); }
+    editing.id = id; state.storeId = id; $("delStoreBtn").hidden = false; $("formTitle").textContent = "Edit " + body.name;
+    setStatus(st, "Saved.", "ok");
+  } catch(e){
+    setStatus(st, e && e.code === "invalid_argument" ? "You have view-only access, so changes can't be saved. Ask the owner for edit access." : "Could not save: " + (e && e.message ? e.message : e), "err");
+  }
+});
+$("delStoreBtn").addEventListener("click", async () => {
+  if(!editing || !editing.id) return;
+  if(!confirm("Delete " + (editing.name || "this store") + "? Fliers already printed are not affected.")) return;
+  try{
+    if(db) await db.collection("stores").doc(editing.id).delete();
+    else { stores = stores.filter(s => s.id !== editing.id); lsSave(); onStores(); }
+    startEdit(null); renderStoreList();
+  } catch(e){ setStatus($("storeStatus"), "Could not delete: " + (e && e.message ? e.message : e), "err"); }
+});
+
+function onStores(){ fillStoreSelect(); renderStoreList(); if(currentStore()) setDept(state.dept); renderRecent(); scheduleRender(); }
+
+/* ---------- boot ---------- */
+async function boot(){
+  try{ await Promise.all([document.fonts.load(F(700, 40)), document.fonts.load(F(400, 40)), document.fonts.load(F(800, 40)), document.fonts.load(F(400, 40, true)), document.fonts.load(F(700, 40, true))]); }catch(e){}
+  applyType();
+  try{
+    const r = await fetch("stores.json?v=" + Date.now(), { cache:"no-store" });
+    if(!r.ok) throw new Error("HTTP " + r.status);
+    const data = await r.json();
+    stores = (Array.isArray(data) ? data : []).filter(x => x && x.id);
+  } catch(e){
+    stores = [];
+    const n = $("dbNotice"); n.hidden = false;
+    n.textContent = "The store list didn't load. Refresh the page; if it keeps happening, tell Matthew.";
+  }
+  onStores();
+}
+boot();
+})();
+</script>
+</body>
+</html>
